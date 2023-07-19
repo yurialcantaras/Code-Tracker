@@ -1,5 +1,12 @@
-// Criar alerta para quem email e senha errado
+// Function to show the popup form
+function showPopup() {
+    popup.style.display = 'block';
+}
 
-// Criar alerta para CPF não cadastrado
+// Function to hide the popup form
+function hidePopup() {
+    popup.style.display = 'none';
+}
 
-// Criar alerta 
+hidePopup();
+ 

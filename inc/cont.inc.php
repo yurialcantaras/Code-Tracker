@@ -19,12 +19,12 @@ if (isset($_POST['login'])) {
     
     if ($adm->adm($eml, $sna)) {
 
-        $_SESSION['adm'] = TRUE;        
-        header("Location: ../panel.php?login=1");
+        $_SESSION['adm'] = TRUE;
+        header("Location: ../adm/painel.php");
 
     } else{
 
-        header("Location: ../adm.php?login=0");
+        header("Location: ../login.adm.php?login=0");
 
     }
 
