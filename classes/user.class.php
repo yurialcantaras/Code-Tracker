@@ -29,9 +29,28 @@ class user extends dbh{
     public function cpfExist($cpf){
 
         $sql = "SELECT * FROM users WHERE cpf = ?";
-        $login = $this->connection()->prepare($sql);
-        $login->execute([$cpf]);
-        return $login->fetchColumn();
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute([$cpf]);
+        return $stmt->fetchColumn();
+
+    }
+
+    public function editUser($editedName, $editedCpf, $editedId){
+
+        $sql = "UPDATE users SET name = ?, cpf = ? WHERE id = ?";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute([$editedName, $editedCpf, $editedId]);
+
+        if ($stmt->execute()) {
+
+            return $stmt->execute();
+
+        } else {
+
+            $errorInfo = $stmt->errorInfo();
+            return $errorInfo[2];
+
+        }
 
     }
 

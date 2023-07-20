@@ -114,7 +114,7 @@ table th {
     display: inline-block;
 }
 
-.back-button button, .insert-button button{
+.edit-button, .cancel-button{
     padding: 10px 20px;
     background-color: #28a745;
     border: none;

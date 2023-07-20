@@ -56,7 +56,6 @@ if ($_SESSION['adm'] === TRUE) {
                     <th>Localização</th>
                     <th></th>
                 </tr>
-                
                 <?php
                 
                 foreach ($codes as $code) {
@@ -69,9 +68,7 @@ if ($_SESSION['adm'] === TRUE) {
                     </tr>
                     ";
                 }
-                
                 ?>
-                
             </table>
         </div>
     </div>
@@ -79,13 +76,15 @@ if ($_SESSION['adm'] === TRUE) {
     <div id="popup">
         <div id="popup-content">
             
-            <form action="">
-                <h4 id="editing-user">Você deseja aditar o usuário <b><span id="userName"></span></b></h4>
-                <input type="text" value="">
-                <input type="text" value="">
-                <input type="submit">
-                <button id="save-btn">Salvar</button>
-                <button onclick="hidePopup()" id="close-btn">fechar</button>
+            <form method="post" action="../inc/cont.inc.php">
+                <h4 id="editing-user">Alteração de Cliente<b><span id="userName"></span></b></h4>
+                <input name="editedId" type="hidden" value="<?php echo $user[0]['id']; ?>">
+                <label for="name">Nome:</label>
+                <input name="editedName"type="text" value="<?php echo $user[0]['name']; ?>"><br>
+                <label for="cpf">CPF:</label>
+                <input name="editedCpf"type="text" value="<?php echo $user[0]['cpf']; ?>"><br>
+                <input class="edit-button" id="save-btn" type="submit" value="Salvar">
+                <input class="cancel-button" onclick="hidePopup()" type="button" id="close-btn" value="fechar">
             </form>
 
         </div>

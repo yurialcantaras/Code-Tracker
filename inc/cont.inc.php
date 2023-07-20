@@ -52,5 +52,23 @@ if (isset($_POST['search'])) {
 
 }
 
+if (isset($_POST['editClient'])) {
+    
+    $editedId = $_POST['editedId'];
+    $editedName = $_POST['editedName'];
+    $editedCpf = $_POST['editedCpf'];
+    $adm = new user();
+
+    if ($adm->editUser($editedName, $editedCpf, $editedId)) {
+        
+        
+
+    }
+
+    
+
+
+}
+
 
 ?>
