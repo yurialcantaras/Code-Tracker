@@ -35,25 +35,6 @@ class user extends dbh{
 
     }
 
-    public function editUser($editedName, $editedCpf, $editedId){
-
-        $sql = "UPDATE users SET name = ?, cpf = ? WHERE id = ?";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute([$editedName, $editedCpf, $editedId]);
-
-        if ($stmt->execute()) {
-
-            return $stmt->execute();
-
-        } else {
-
-            $errorInfo = $stmt->errorInfo();
-            return $errorInfo[2];
-
-        }
-
-    }
-
 
 }
 

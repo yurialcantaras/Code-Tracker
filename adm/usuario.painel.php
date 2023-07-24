@@ -11,8 +11,14 @@ if ($_SESSION['adm'] === TRUE) {
     include_once '../classes/adm.class.php';
 
     $adm = new adm();
-    $codes = $adm->listCodes($_GET['user']);
-    $user = $adm->selectUser($_GET['user']);
+    $codes = $adm->listCodes($_GET['cpf']);
+    $user = $adm->selectUser($_GET['cpf']);
+
+    if (!isset($_SESSION['error'])) {
+        
+        $_SESSION['error'] = " ";
+
+    }
 
 ?>
 <!DOCTYPE html>
@@ -22,10 +28,15 @@ if ($_SESSION['adm'] === TRUE) {
     <link rel="stylesheet" href="../css/painel-style.css">
 </head>
 <body>
-    <div class="banner">
-        <h1>Cliente <?php echo $user[0]['name']; ?></h1>
-        <button class="logout">Sair</button>
+    <div id="message">
+        <?php echo $_SESSION['error']; ?>
     </div>
+    <form action="../inc/cont.inc.php" method="POST">
+        <div class="banner">
+            <h1>Cliente <?php echo $user[0]['name']; ?></h1>
+            <button name="logout" type="submit" class="logout">Sair</button>
+        </div>
+    </form>
 
     <div class="info-container">
 
@@ -36,7 +47,7 @@ if ($_SESSION['adm'] === TRUE) {
         </ul>
         
         <div class="icons">
-            <img onclick="showPopup()" id="edit-button" src="../files/edit.png" alt="Ícone de Edição">
+            <img onclick="showEditForm()" id="edit-button" src="../files/edit.png" alt="Ícone de Edição">
             <img id="delete-button" src="../files/delete.png" alt="Ícone de Exclusão">
         </div>
 
@@ -44,7 +55,7 @@ if ($_SESSION['adm'] === TRUE) {
 
     <div class="panel">
         <div class="insert-button">
-            <button onclick="openInsertForm()">Nova Remessa</button>
+            <button onclick="showNewCodeForm()">Nova Remessa</button>
         </div>
         <div class="back-button">
             <a href="painel.php"><button id="back-button">Voltar</button></a>
@@ -64,7 +75,7 @@ if ($_SESSION['adm'] === TRUE) {
                     <tr>
                         <td>{$code['codigo']}</td>
                         <td>{$code['localizacao']}</td>
-                        <td><a href='codigo.painel.php?codigo=".$code['codigo']."&cpf=".$_GET['user']."'><button id='view-btn' class='action-button view'>Histórico</button></a></td>
+                        <td><a href='codigo.painel.php?code=".$code['codigo']."&cpf=".$_GET['cpf']."'><button id='view-btn' class='action-button view'>Histórico</button></a></td>
                     </tr>
                     ";
                 }
@@ -73,18 +84,34 @@ if ($_SESSION['adm'] === TRUE) {
         </div>
     </div>
 
-    <div id="popup">
-        <div id="popup-content">
+    <div id="editForm">
+        <div class="formContent">
             
-            <form method="post" action="../inc/cont.inc.php">
-                <h4 id="editing-user">Alteração de Cliente<b><span id="userName"></span></b></h4>
+            <form method="post" action="../inc/cont.inc.php" onsubmit="return confirmForm();">
+                <h4 class="editing-user">Alteração de Cliente<b><span id="userName"></span></b></h4>
                 <input name="editedId" type="hidden" value="<?php echo $user[0]['id']; ?>">
                 <label for="name">Nome:</label>
                 <input name="editedName"type="text" value="<?php echo $user[0]['name']; ?>"><br>
                 <label for="cpf">CPF:</label>
                 <input name="editedCpf"type="text" value="<?php echo $user[0]['cpf']; ?>"><br>
-                <input class="edit-button" id="save-btn" type="submit" value="Salvar">
-                <input class="cancel-button" onclick="hidePopup()" type="button" id="close-btn" value="fechar">
+                <input class="edit-button" type="submit" name="editClient" value="Salvar">
+                <input class="cancel-button" onclick="hideEditForm()" type="button" id="close-btn" value="fechar">
+            </form>
+
+        </div>
+    </div>
+
+    <div id="newCodeForm">
+        <div class="formContent">
+            
+            <form method="post" action="../inc/cont.inc.php" onsubmit="return confirmForm();">
+                <h4 class="editing-user">Nova Remessa <b><span id="userName"></span></b></h4>
+                <label for="code">Código:</label>
+                <input name="code" type="text"><br>
+                <label for="localization">Localização:</label>
+                <input name="localization" type="text"><br>
+                <input class="edit-button" type="submit" name="newCode" value="Salvar">
+                <input class="cancel-button" onclick="hideNewCodeForm()" type="button" id="close-btn" value="fechar">
             </form>
 
         </div>
@@ -98,7 +125,7 @@ if ($_SESSION['adm'] === TRUE) {
 
 }else{
 
-    header("Location: adm.php?login=0");
+    header("Location: ../login.adm.php?login=0");
 
 }
 

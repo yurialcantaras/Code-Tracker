@@ -12,7 +12,14 @@ if ($_SESSION['adm'] === TRUE) {
 
     $cpf = $_GET['cpf'];
     $adm = new adm();
-    $codes = $adm->listCodes($_GET['codigo']);
+    $codes = $adm->listCodes($_GET['code']);
+    $user = $adm->selectUser($_GET['cpf']);
+
+    if (!isset($_SESSION['error'])) {
+        
+        $_SESSION['error'] = " ";
+
+    }
 
 ?>
 <!DOCTYPE html>
@@ -22,22 +29,21 @@ if ($_SESSION['adm'] === TRUE) {
     <link rel="stylesheet" href="../css/painel-style.css">
 </head>
 <body>
-    <div class="banner">
-        <h1>Painel de Administração</h1>
-        <button class="logout">Sair</button>
-    </div>
-    <div class="back-button">
-            <a href="usuario.painel.php"><button id="back-button">Voltar</button></a>
+    <form action="../inc/cont.inc.php" method="POST">
+        <div class="banner">
+            <h1><?php echo "Remessa ".$_GET['code']." de ".$user[0]['name']; ?></h1>
+            <button name="logout" type="submit" class="logout">Sair</button>
         </div>
+    </form>
+    
     <div class="panel">
-        <div class="insert-button">
-            <button onclick="openInsertForm()">Novo Código</button>
+        <div class="back-button">
+            <a href="usuario.painel.php?cpf=<?php echo $user[0]['cpf'];?>"><button id="back-button">Voltar</button></a>
         </div>
         <div class="table-container">
             <table>
                 <tr>
-                    <th>Código</th>
-                    <th>Localização</th>
+                    <th>Histórico</th>
                     <th></th>
                 </tr>
                 
@@ -76,7 +82,7 @@ if ($_SESSION['adm'] === TRUE) {
 
 }else{
 
-    header("Location: adm.php?login=0");
+    header("Location: ../login.adm.php?login=0");
 
 }
 
