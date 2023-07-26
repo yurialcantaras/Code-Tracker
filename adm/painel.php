@@ -8,9 +8,11 @@ session_start();
 if ($_SESSION['adm'] === TRUE) {
 
     include_once '../classes/adm.class.php';
+    include_once '../classes/codes.class.php';
 
     $adm = new adm();
-    $users = $adm->listUsers();
+    $code = new codes();
+    $users = $adm->listClients();
 
 ?>
 <!DOCTYPE html>
@@ -47,7 +49,7 @@ if ($_SESSION['adm'] === TRUE) {
                     <tr>
                         <td>{$user['name']}</td>
                         <td>{$user['cpf']}</td>
-                        <td>{$adm->numCodes($user['cpf'])}</td>
+                        <td>{$code->totalCodes($user['cpf'])}</td>
                         <td><a href='usuario.painel.php?cpf=".$user['cpf']."'><button id='view-btn' class='action-button view'>Vizualizar</button></a></td>
                     </tr>
                     ";

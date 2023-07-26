@@ -67,7 +67,7 @@ if (isset($_POST['newClient'])) {
 
     $adm = new adm();
 
-    if (count($adm->selectUser($newCpf)) == 0) {
+    if (count($adm->selectClient($newCpf)) == 0) {
 
         $newClient = $adm->newClient($newName, $newCpf);
 
@@ -85,7 +85,7 @@ if (isset($_POST['newClient'])) {
         
     } else {
 
-        var_dump(count($adm->selectUser($newCpf)));
+        var_dump(count($adm->selectClient($newCpf)));
 
     }
 
@@ -100,7 +100,7 @@ if (isset($_POST['editClient'])) {
     $editedCpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['editedCpf']);
 
     $adm = new adm();
-    $editedUser = $adm->editUser($editedName, $editedCpf, $editedId);
+    $editedUser = $adm->editClient($editedName, $editedCpf, $editedId);
 
     if ($editedUser) {
         
@@ -118,24 +118,36 @@ if (isset($_POST['editClient'])) {
 
 if (isset($_POST['newCode'])) {
     
-    $editedId = $_POST['editedId'];
-    $editedName = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['editedName']);
-    $editedCpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['editedCpf']);
+    $cpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
+    $code = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['code']);
+    $local = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['local']);
+    
+    $adm = new codes();
+    $existCode = $adm->existCode($code);
 
-    $adm = new adm();
-    $editedUser = $adm->editUser($editedName, $editedCpf, $editedId);
+    if ($existCode == false) {
 
-    if ($editedUser) {
+        $newCode = $adm->newCode($cpf, $code, $local);
+    
+        if ($newCode) {
+            
+            $_SESSION['alert'] = "Novo código cadastrado com sucesso!";
+            header("Location: ../adm/usuario.painel.php?cpf={$cpf}&edited=1");
+    
+        }else{
+    
+            $_SESSION['error'] = $editedUser;
+            header("Location: ../adm/usuario.painel.php?cpf={$cpf}edited=0");
+            
+        }
         
-        $_SESSION['error'] = "Cliente alterado com sucesso!";
-        header("Location: ../adm/usuario.painel.php?user={$editedCpf}&edited=1");
-
-    }else{
-
-        $_SESSION['error'] = $editedUser;
-        header("Location: ../adm/usuario.painel.php?edited=1");
+    } else {
         
+        $_SESSION['alert'] = "Código já existe para esse cliente";
+        header("Location: ../adm/usuario.painel.php?cpf={$cpf}&edited=0");        
+
     }
+    
 }
 
 

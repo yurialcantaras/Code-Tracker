@@ -22,7 +22,7 @@ class adm extends dbh{
 
     }
 
-    public function selectUser($cpf){
+    public function selectClient($cpf){
 
         $sql = "SELECT * FROM users WHERE cpf = ?";
         $login = $this->connection()->prepare($sql);
@@ -31,7 +31,7 @@ class adm extends dbh{
 
     }
     
-    public function listUsers(){
+    public function listClients(){
 
         $sql = "SELECT * FROM users";
         $login = $this->connection()->prepare($sql);
@@ -40,7 +40,7 @@ class adm extends dbh{
 
     }
 
-    public function editUser($editedName, $editedCpf, $editedId){
+    public function editClient($editedName, $editedCpf, $editedId){
 
         $sql = "UPDATE users SET name = ?, cpf = ? WHERE id = ?";
         $stmt = $this->connection()->prepare($sql);
@@ -56,24 +56,6 @@ class adm extends dbh{
             return $errorInfo[2];
 
         }
-
-    }
-
-    public function listCodes($cpf){
-
-        $sql = "SELECT * FROM codes WHERE cpf = ?";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute([$cpf]);
-        return $stmt->fetchAll();
-
-    }
-
-    public function numCodes($cpf){
-
-        $sql = "SELECT * FROM codes WHERE cpf = ?";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute([$cpf]);
-        return $stmt->rowCount();
 
     }
     

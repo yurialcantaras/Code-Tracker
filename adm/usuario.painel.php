@@ -9,10 +9,13 @@ session_start();
 if ($_SESSION['adm'] === TRUE) {
 
     include_once '../classes/adm.class.php';
+    include_once '../classes/codes.class.php';
 
     $adm = new adm();
-    $codes = $adm->listCodes($_GET['cpf']);
-    $user = $adm->selectUser($_GET['cpf']);
+    $user = $adm->selectClient($_GET['cpf']);
+
+    $code = new codes();
+    $codes = $code->listCodes($_GET['cpf']);
 
     if (!isset($_SESSION['error'])) {
         
@@ -69,15 +72,36 @@ if ($_SESSION['adm'] === TRUE) {
                 </tr>
                 <?php
                 
-                foreach ($codes as $code) {
-                    
-                    echo "
-                    <tr>
-                        <td>{$code['codigo']}</td>
-                        <td>{$code['localizacao']}</td>
-                        <td><a href='codigo.painel.php?code=".$code['codigo']."&cpf=".$_GET['cpf']."'><button id='view-btn' class='action-button view'>Histórico</button></a></td>
-                    </tr>
-                    ";
+                foreach ($codes as $cod) {
+
+                    $local = $code->listLocal($cod['code']);
+                    $local = end($local);
+
+                    if ($local != false) {
+                        
+                        echo "
+                            <tr>
+                            <td>{$cod['code']}</td>
+                            <td>{$local['historic']}</td>
+                            <td>
+                            <a href='codigo.painel.php?code=".$cod['code']."&cpf=".$_GET['cpf']."'><button id='view-btn' class='action-button view'>Histórico</button></a>
+                            </td>
+                            </tr>
+                        ";
+                    } else if ($local == false) {
+                        
+                        echo "
+                            <tr>
+                            <td>{$cod['code']}</td>
+                            <td>Sem localização</td>
+                            <td>
+                            <a href='codigo.painel.php?code=".$cod['code']."&cpf=".$_GET['cpf']."'><button id='view-btn' class='action-button view'>Histórico</button></a>
+                            </td>
+                            </tr>
+                        ";
+
+                    }
+
                 }
                 ?>
             </table>
@@ -88,7 +112,7 @@ if ($_SESSION['adm'] === TRUE) {
         <div class="formContent">
             
             <form method="post" action="../inc/cont.inc.php" onsubmit="return confirmForm();">
-                <h4 class="editing-user">Alteração de Cliente<b><span id="userName"></span></b></h4>
+                <h4 class="editing-user">Alteração de Cliente</h4>
                 <input name="editedId" type="hidden" value="<?php echo $user[0]['id']; ?>">
                 <label for="name">Nome:</label>
                 <input name="editedName"type="text" value="<?php echo $user[0]['name']; ?>"><br>
@@ -105,17 +129,37 @@ if ($_SESSION['adm'] === TRUE) {
         <div class="formContent">
             
             <form method="post" action="../inc/cont.inc.php" onsubmit="return confirmForm();">
-                <h4 class="editing-user">Nova Remessa <b><span id="userName"></span></b></h4>
+                <h4 class="editing-user">Nova Remessa</h4>
+                <input type="hidden" name="cpf" value="<?php echo $_GET['cpf']; ?>">
                 <label for="code">Código:</label>
                 <input name="code" type="text"><br>
-                <label for="localization">Localização:</label>
-                <input name="localization" type="text"><br>
+                <label for="local">Localização:</label>
+                <input name="local" type="text"><br>
                 <input class="edit-button" type="submit" name="newCode" value="Salvar">
                 <input class="cancel-button" onclick="hideNewCodeForm()" type="button" id="close-btn" value="fechar">
             </form>
 
         </div>
     </div>
+
+    <!-- NOVA LOCALIZAÇÃO PARA A REMESSA
+        
+    
+    <div id="newLocForm">
+        <div class="formContent">
+            
+            <form method="post" action="../inc/cont.inc.php" onsubmit="return confirmForm();">
+                <h4 class="editing-user">Nova <b><span id="userName"></span></b></h4>
+                <label for="code">Código:</label>
+                <input name="code" type="text"><br>
+                <label for="localization">Localização:</label>
+                <input name="localization" type="text"><br>
+                <input class="edit-button" type="submit" name="newLoc" value="Salvar">
+                <input class="cancel-button" onclick="hideNewCodeForm()" type="button" id="close-btn" value="fechar">
+            </form>
+
+        </div>
+    </div> -->
 
     <script src="../js/javascript.js"></script>
 </body>
