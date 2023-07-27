@@ -30,6 +30,62 @@ class codes extends dbh{
 
     }
 
+    public function deleteCode($id, $code){
+
+        $historic = $this->listLocal($code);
+
+        if ($historic){
+
+            $this->deleteAllLocal($code);
+            
+        }
+        
+        $sql = "DELETE FROM codes WHERE id = ?";
+        $stmt = $this->connection()->prepare($sql);
+        
+        $deleted = $stmt->execute([$id]);
+        
+        if ($deleted){
+
+            return $deleted;
+
+        } else {
+
+            $errorInfo = $stmt->errorInfo();
+            return $errorInfo[2];
+
+        }
+
+    }
+
+    public function deleteAllCode($id, $code, $cpf){
+
+        $historic = $this->listLocal($code);
+
+        if ($historic){
+
+            $this->deleteAllLocal($code);
+            
+        }
+        
+        $sql = "DELETE FROM codes WHERE id = ?";
+        $stmt = $this->connection()->prepare($sql);
+        
+        $deleted = $stmt->execute([$id]);
+        
+        if ($deleted){
+
+            return $deleted;
+
+        } else {
+
+            $errorInfo = $stmt->errorInfo();
+            return $errorInfo[2];
+
+        }
+
+    }
+
     public function listCodes($cpf){
 
         $sql = "SELECT * FROM codes WHERE cpf = ? ORDER BY ID DESC";
@@ -79,7 +135,7 @@ class codes extends dbh{
 
     public function listLocal($code){
 
-        $sql = "SELECT * FROM historic WHERE code = ? ORDER BY ID DESC";
+        $sql = "SELECT * FROM historic WHERE code = ? ORDER BY record_date DESC";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute([$code]);
         
@@ -87,9 +143,43 @@ class codes extends dbh{
 
     }
     
-    public function deleteLocal(){
+    public function deleteLocal($id){
 
+        $sql = "DELETE FROM historic WHERE id = ?";
+        $stmt = $this->connection()->prepare($sql);
         
+        $deleted = $stmt->execute([$id]);
+        
+        if ($deleted){
+
+            return $deleted;
+
+        } else {
+
+            $errorInfo = $stmt->errorInfo();
+            return $errorInfo[2];
+
+        }
+
+    }
+
+    public function deleteAllLocal($code){
+
+        $sql = "DELETE FROM historic WHERE code = ?";
+        $stmt = $this->connection()->prepare($sql);
+        
+        $deleted = $stmt->execute([$code]);
+        
+        if ($deleted){
+
+            return $deleted;
+
+        } else {
+
+            $errorInfo = $stmt->errorInfo();
+            return $errorInfo[2];
+
+        }
 
     }
 

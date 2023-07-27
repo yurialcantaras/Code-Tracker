@@ -22,6 +22,39 @@ class adm extends dbh{
 
     }
 
+    public function deleteClient(){
+
+        include_once "../classes/codes.class.php";
+
+        $code = new codes();
+        // $codes = $code->delete
+
+        $historic = $this->listLocal($code);
+
+        if ($historic){
+
+            $this->deleteAllLocal($code);
+            
+        }
+        
+        $sql = "DELETE FROM codes WHERE id = ?";
+        $stmt = $this->connection()->prepare($sql);
+        
+        $deleted = $stmt->execute([$id]);
+        
+        if ($deleted){
+
+            return $deleted;
+
+        } else {
+
+            $errorInfo = $stmt->errorInfo();
+            return $errorInfo[2];
+
+        }
+
+    }
+
     public function selectClient($cpf){
 
         $sql = "SELECT * FROM users WHERE cpf = ?";

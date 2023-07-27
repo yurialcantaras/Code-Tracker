@@ -51,7 +51,7 @@ if ($_SESSION['adm'] === TRUE) {
         
         <div class="icons">
             <img onclick="showEditForm()" id="edit-button" src="../files/edit.png" alt="Ícone de Edição">
-            <img id="delete-button" src="../files/delete.png" alt="Ícone de Exclusão">
+            <img onclick="showDeleteClientForm()" id="delete-button" src="../files/delete.png" alt="Ícone de Exclusão">
         </div>
 
     </div>
@@ -84,7 +84,13 @@ if ($_SESSION['adm'] === TRUE) {
                             <td>{$cod['code']}</td>
                             <td>{$local['historic']}</td>
                             <td>
-                            <a href='codigo.painel.php?code=".$cod['code']."&cpf=".$_GET['cpf']."'><button id='view-btn' class='action-button view'>Histórico</button></a>
+                                <a href='codigo.painel.php?code=".$cod['code']."&cpf=".$_GET['cpf']."'><button id='view-btn' class='action-button view'>Histórico</button></a>
+                                <form action='../inc/cont.inc.php' method='post' onsubmit='return confirmForm();'>
+                                    <input type='hidden' value='{$cod['id']}' name='id'>
+                                    <input type='hidden' value='{$cod['code']}' name='code'>
+                                    <input type='hidden' value='{$_GET['cpf']}' name='cpf'>
+                                    <input id='delete-code' type='submit' value='Excluir' name='deleteCode'>
+                                </form>
                             </td>
                             </tr>
                         ";
@@ -95,7 +101,13 @@ if ($_SESSION['adm'] === TRUE) {
                             <td>{$cod['code']}</td>
                             <td>Sem localização</td>
                             <td>
-                            <a href='codigo.painel.php?code=".$cod['code']."&cpf=".$_GET['cpf']."'><button id='view-btn' class='action-button view'>Histórico</button></a>
+                                <a href='codigo.painel.php?code=".$cod['code']."&cpf=".$_GET['cpf']."'><button id='view-btn' class='action-button view'>Histórico</button></a>
+                                <form action='../inc/cont.inc.php' method='post' onsubmit='return confirmForm();'>
+                                    <input type='hidden' value='{$cod['id']}' name='id'>
+                                    <input type='hidden' value='{$cod['code']}' name='code'>
+                                    <input type='hidden' value='{$_GET['cpf']}' name='cpf'>
+                                    <input id='delete-code' type='submit' value='Excluir' name='deleteCode'>
+                                </form>
                             </td>
                             </tr>
                         ";
@@ -144,24 +156,20 @@ if ($_SESSION['adm'] === TRUE) {
         </div>
     </div>
 
-    <!-- NOVA LOCALIZAÇÃO PARA A REMESSA
-        
-    
-    <div id="newLocForm">
+    <div id="deleteClientForm">
         <div class="formContent">
             
-            <form method="post" action="../inc/cont.inc.php" onsubmit="return confirmForm();">
-                <h4 class="editing-user">Nova <b><span id="userName"></span></b></h4>
-                <label for="code">Código:</label>
-                <input name="code" type="text"><br>
-                <label for="localization">Localização:</label>
-                <input name="localization" type="text"><br>
-                <input class="edit-button" type="submit" name="newLoc" value="Salvar">
-                <input class="cancel-button" onclick="hideNewCodeForm()" type="button" id="close-btn" value="fechar">
+            <form action='../inc/cont.inc.php' method='post' onsubmit='return confirmForm();'>
+                <h4 class="editing-user">Deseja realmente excluir o cliente?</h4>
+                <input type='hidden' value="<?php echo $user[0]['id']; ?>" name='id'>
+                <input type='hidden' value="<?php echo $user[0]['cpf']; ?>" name='cpf'>
+                <!-- <input type='hidden' value="<?php //echo $_GET['cpf']; ?>" name='cpf'> -->
+                <input id='delete-code' type='submit' value='Excluir' name='deleteCode'>
+                <input class="cancel-button" onclick="hideDeleteClientForm()" type="button" id="close-btn" value="Cancelar">
             </form>
 
         </div>
-    </div> -->
+    </div>
 
     <script src="../js/javascript.js"></script>
 </body>

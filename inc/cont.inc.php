@@ -92,6 +92,28 @@ if (isset($_POST['newClient'])) {
     
 }
 
+if (isset($_POST['deleteClient'])) {
+
+    $id = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['id']);
+    $cpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
+
+    $adm = new adm();
+    $deleteClient = $adm->deleteClient($id);
+
+    if ($deleteClient) {
+        
+        $_SESSION['alert'] = "Histórico excluido com sucesso!";
+        header("Location: ../adm/painel.php?edited=1");
+
+    }else{
+
+        $_SESSION['error'] = $$deleteLocal;
+        header("Location: ../adm/usuario.painel.php?cpf={$cpf}&edited=1");
+        
+    }
+    
+}
+
 
 if (isset($_POST['editClient'])) {
     
@@ -152,9 +174,32 @@ if (isset($_POST['newCode'])) {
     
 }
 
+if (isset($_POST['deleteCode'])) {
+    
+    $id = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['id']);
+    $code = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['code']);
+    $cpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
+
+    $adm = new codes();
+    $deleteCode = $adm->deleteCode($id, $code);
+
+    if ($deleteCode) {
+        
+        $_SESSION['alert'] = "Histórico excluido com sucesso!";
+        header("Location: ../adm/usuario.painel.php?cpf={$cpf}&edited=1");
+
+    }else{
+
+        $_SESSION['error'] = $$deleteLocal;
+        header("Location: ../adm/usuario.painel.php?cpf={$cpf}&edited=1");
+        
+    }
+
+}
+
 if (isset($_POST['newLocal'])) {
     
-    $cpf = $_POST['cpf'];
+    $cpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
     $code = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['code']);
     $local = preg_replace('/[^\p{L}0-9\s]/u', '', $_POST['local']);
     $date = $_POST['datetime'];
@@ -175,6 +220,29 @@ if (isset($_POST['newLocal'])) {
         
     }
     
+}
+
+if (isset($_POST['deleteLocal'])) {
+    
+    $id = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['id']);
+    $cpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
+    $code = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['code']);
+
+    $adm = new codes();
+    $deleteLocal = $adm->deleteLocal($id);
+
+    if ($deleteLocal) {
+        
+        $_SESSION['alert'] = "Histórico excluido com sucesso!";
+        header("Location: ../adm/codigo.painel.php?code={$code}&cpf={$cpf}&edited=1");
+
+    }else{
+
+        $_SESSION['error'] = $$deleteLocal;
+        header("Location: ../adm/codigo.painel.php?code={$code}&cpf={$cpf}&edited=0");
+        
+    }
+
 }
 
 

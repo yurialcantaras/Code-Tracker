@@ -12,6 +12,13 @@ function showNewCodeForm(){
 
 }
 
+function showDeleteClientForm(){
+
+    var $editForm = document.getElementById('deleteClientForm');
+    $editForm.style.display = 'block';
+
+}
+
 function hideEditForm(){
 
     var $editForm = document.getElementById('editForm');
@@ -26,6 +33,13 @@ function hideNewCodeForm(){
 
 }
 
+function hideDeleteClientForm(){
+
+    var $editForm = document.getElementById('deleteClientForm');
+    $editForm.style.display = 'none';
+
+}
+
 function confirmForm(){
 
     return confirm("Tem certeza de que deseja prosseguir?");
@@ -35,4 +49,5 @@ function confirmForm(){
 document.addEventListener('DOMContentLoaded', function() {
     hideEditForm();
     hideNewCodeForm();
+    hideDeleteClientForm();
 })

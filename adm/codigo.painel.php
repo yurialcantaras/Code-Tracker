@@ -57,12 +57,19 @@ if ($_SESSION['adm'] === TRUE) {
                 <?php
                 
                 foreach ($locals as $local) {
-                    
+
                     echo "
                     <tr>
                         <td>{$local['historic']}</td>
                         <td>{$local['record_date']}</td>
-                        <td><a href='codigo.painel.php?codigo=".$local['code']."'><button id='view-btn' class='action-button view'>Histórico</button></a></td>
+                        <td>
+                        <form action='../inc/cont.inc.php' method='post' onsubmit='return confirmForm();'>
+                            <input type='hidden' value='{$local['id']}' name='id'>
+                            <input type='hidden' value='{$local['code']}' name='code'>
+                            <input type='hidden' value='{$_GET['cpf']}' name='cpf'>
+                            <input id='delete-local' type='submit' value='Excluir' name='deleteLocal'>
+                        </form>
+                        </td>
                     </tr>
                     ";
                 }
