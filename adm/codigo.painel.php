@@ -9,11 +9,14 @@ session_start();
 if ($_SESSION['adm'] === TRUE) {
 
     include_once '../classes/adm.class.php';
+    include_once '../classes/codes.class.php';
 
     $cpf = $_GET['cpf'];
     $adm = new adm();
-    $codes = $adm->listCodes($_GET['code']);
-    $user = $adm->selectUser($_GET['cpf']);
+    $cod = new codes();
+
+    $user = $adm->selectClient($_GET['cpf']);
+    $locals = $cod->listLocal($_GET['code']);
 
     if (!isset($_SESSION['error'])) {
         
@@ -25,18 +28,21 @@ if ($_SESSION['adm'] === TRUE) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Produtos de <?php $user['name'] ?></title>
+    <title>Produtos de <?php echo $user[0]['name']; ?></title>
     <link rel="stylesheet" href="../css/painel-style.css">
 </head>
 <body>
     <form action="../inc/cont.inc.php" method="POST">
         <div class="banner">
-            <h1><?php echo "Remessa ".$_GET['code']." de ".$user[0]['name']; ?></h1>
+            <h1><?php echo "Histórico da Remessa ".$_GET['code'];?></h1>
             <button name="logout" type="submit" class="logout">Sair</button>
         </div>
     </form>
     
     <div class="panel">
+        <div class="insert-button">
+            <button onclick="showNewCodeForm()">Nova Localização</button>
+        </div>
         <div class="back-button">
             <a href="usuario.painel.php?cpf=<?php echo $user[0]['cpf'];?>"><button id="back-button">Voltar</button></a>
         </div>
@@ -44,18 +50,19 @@ if ($_SESSION['adm'] === TRUE) {
             <table>
                 <tr>
                     <th>Histórico</th>
+                    <th>Data e Hora</th>
                     <th></th>
                 </tr>
                 
                 <?php
                 
-                foreach ($codes as $code) {
+                foreach ($locals as $local) {
                     
                     echo "
                     <tr>
-                        <td>{$code['codigo']}</td>
-                        <td>{$code['localizacao']}</td>
-                        <td><a href='codigo.painel.php?codigo=".$code['codigo']."'><button id='view-btn' class='action-button view'>Histórico</button></a></td>
+                        <td>{$local['historic']}</td>
+                        <td>{$local['record_date']}</td>
+                        <td><a href='codigo.painel.php?codigo=".$local['code']."'><button id='view-btn' class='action-button view'>Histórico</button></a></td>
                     </tr>
                     ";
                 }
@@ -66,11 +73,20 @@ if ($_SESSION['adm'] === TRUE) {
         </div>
     </div>
 
-    <div id="popup">
-        <div id="popup-content">
-            <h4 id="editing-user">Você deseja aditar o usuário <b><span id="userName"></span></b></h4>
-            <button id="save-btn">Salvar</button>
-            <button id="close-btn">fechar</button>
+    <div id="newCodeForm">
+        <div class="formContent">
+            
+            <form method="post" action="../inc/cont.inc.php" onsubmit="return confirmForm();">
+                <input type="hidden" name="code" value="<?php echo $_GET['code']; ?>">
+                <input type="hidden" name="cpf" value="<?php echo $_GET['cpf']; ?>">
+                <label for="local">Nova Localização:</label>
+                <input name="local" type="text" require><br>
+                <label for="local">Data e Hora:</label>
+                <input type="datetime-local" id="datetime" name="datetime">
+                <input class="edit-button" type="submit" name="newLocal" value="Salvar">
+                <input class="cancel-button" onclick="hideNewCodeForm()" type="button" id="close-btn" value="fechar">
+            </form>
+
         </div>
     </div>
 

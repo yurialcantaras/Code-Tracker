@@ -31,7 +31,7 @@ if ($_SESSION['adm'] === TRUE) {
     </form>
     <div class="panel">
         <div class="insert-button">
-            <button onclick="showEditForm()">Novo Usuário</button>
+            <button onclick="showEditForm()">Novo Cliente</button>
         </div>
         <div class="table-container">
             <table>

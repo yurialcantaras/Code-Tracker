@@ -75,7 +75,7 @@ if ($_SESSION['adm'] === TRUE) {
                 foreach ($codes as $cod) {
 
                     $local = $code->listLocal($cod['code']);
-                    $local = end($local);
+                    $local = reset($local);
 
                     if ($local != false) {
                         
@@ -135,6 +135,8 @@ if ($_SESSION['adm'] === TRUE) {
                 <input name="code" type="text"><br>
                 <label for="local">Localização:</label>
                 <input name="local" type="text"><br>
+                <label for="local">Data e Hora:</label>
+                <input type="datetime-local" id="datetime" name="datetime">
                 <input class="edit-button" type="submit" name="newCode" value="Salvar">
                 <input class="cancel-button" onclick="hideNewCodeForm()" type="button" id="close-btn" value="fechar">
             </form>

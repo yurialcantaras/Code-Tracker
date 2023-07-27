@@ -33,7 +33,7 @@ class adm extends dbh{
     
     public function listClients(){
 
-        $sql = "SELECT * FROM users";
+        $sql = "SELECT * FROM users ORDER BY name";
         $login = $this->connection()->prepare($sql);
         $login->execute();
         return $login->fetchAll();

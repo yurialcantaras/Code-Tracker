@@ -174,7 +174,6 @@ table th {
     padding: 10px;
     margin-top: 4px;
     margin-bottom: 4px;
-    color: #fff;
     border-radius: 3px;
     border: 1px solid gray;
     font-size: 16px;
@@ -187,5 +186,4 @@ table th {
 #close-btn {
     margin-top: 10px;
 }
-  
   

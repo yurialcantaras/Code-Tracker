@@ -4,14 +4,14 @@ include_once "dbh.class.php";
 
 class codes extends dbh{
 
-    public function newCode($cpf, $code, $local){
+    public function newCode($cpf, $code, $local, $datetime){
 
         $sql = "INSERT INTO codes (`cpf`, `code`) VALUES (?, ?)";
         $stmt = $this->connection()->prepare($sql);
 
         if ($stmt->execute([$cpf, $code])) {
 
-            if ($this->newLocal($code, $local)) {
+            if ($this->newLocal($code, $local, $datetime)) {
                 
                 return TRUE;
 
@@ -32,7 +32,7 @@ class codes extends dbh{
 
     public function listCodes($cpf){
 
-        $sql = "SELECT * FROM codes WHERE cpf = ?";
+        $sql = "SELECT * FROM codes WHERE cpf = ? ORDER BY ID DESC";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute([$cpf]);
         
@@ -59,13 +59,12 @@ class codes extends dbh{
         
     }
 
-    public function newLocal($code, $local){
+    public function newLocal($code, $local, $datetime){
 
-        $date = date('Y-m-d H:i:s');
         $sql = "INSERT INTO historic (`code`, `historic`, `record_date`) VALUES (?, ?, ?)";
         $stmt = $this->connection()->prepare($sql);
 
-        if ($stmt->execute([$code, $local, $date])) {
+        if ($stmt->execute([$code, $local, $datetime])) {
             
             return true;
 
@@ -80,7 +79,7 @@ class codes extends dbh{
 
     public function listLocal($code){
 
-        $sql = "SELECT * FROM historic WHERE code = ?";
+        $sql = "SELECT * FROM historic WHERE code = ? ORDER BY ID DESC";
         $stmt = $this->connection()->prepare($sql);
         $stmt->execute([$code]);
         

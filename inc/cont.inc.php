@@ -121,13 +121,15 @@ if (isset($_POST['newCode'])) {
     $cpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
     $code = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['code']);
     $local = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['local']);
+    $date = $_POST['datetime'];
+    $datetime = date("Y-m-d H:i:s", strtotime($date));
     
     $adm = new codes();
     $existCode = $adm->existCode($code);
 
     if ($existCode == false) {
 
-        $newCode = $adm->newCode($cpf, $code, $local);
+        $newCode = $adm->newCode($cpf, $code, $local, $datetime);
     
         if ($newCode) {
             
@@ -143,9 +145,34 @@ if (isset($_POST['newCode'])) {
         
     } else {
         
-        $_SESSION['alert'] = "Código já existe para esse cliente";
+        $_SESSION['alert'] = "Remessa já existe para esse cliente";
         header("Location: ../adm/usuario.painel.php?cpf={$cpf}&edited=0");        
 
+    }
+    
+}
+
+if (isset($_POST['newLocal'])) {
+    
+    $cpf = $_POST['cpf'];
+    $code = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['code']);
+    $local = preg_replace('/[^\p{L}0-9\s]/u', '', $_POST['local']);
+    $date = $_POST['datetime'];
+    $datetime = date("Y-m-d H:i:s", strtotime($date));
+    
+    $adm = new codes();
+    $newLocal = $adm->newLocal($code, $local, $datetime);
+
+    if ($newLocal) {
+        
+        $_SESSION['alert'] = "Novo código cadastrado com sucesso!";
+        header("Location: ../adm/codigo.painel.php?cpf={$cpf}&code={$code}&edited=1");
+
+    }else{
+
+        $_SESSION['error'] = $editedUser;
+        header("Location: ../adm/usuario.painel.php?cpf={$cpf}edited=0");
+        
     }
     
 }
