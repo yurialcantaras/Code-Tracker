@@ -160,11 +160,10 @@ if ($_SESSION['adm'] === TRUE) {
         <div class="formContent">
             
             <form action='../inc/cont.inc.php' method='post' onsubmit='return confirmForm();'>
-                <h4 class="editing-user">Deseja realmente excluir o cliente?</h4>
+                <h4 class="editing-user">Excluir o cliente irá apagar também todos os códigos e histórico de cada um deles. Você tem certeza?</h4>
                 <input type='hidden' value="<?php echo $user[0]['id']; ?>" name='id'>
                 <input type='hidden' value="<?php echo $user[0]['cpf']; ?>" name='cpf'>
-                <!-- <input type='hidden' value="<?php //echo $_GET['cpf']; ?>" name='cpf'> -->
-                <input id='delete-code' type='submit' value='Excluir' name='deleteCode'>
+                <input id='delete-code' type='submit' value='Excluir' name='deleteClient'>
                 <input class="cancel-button" onclick="hideDeleteClientForm()" type="button" id="close-btn" value="Cancelar">
             </form>
 

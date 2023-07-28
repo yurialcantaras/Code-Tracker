@@ -22,36 +22,37 @@ class adm extends dbh{
 
     }
 
-    public function deleteClient(){
+    public function deleteClient($id, $cpf){
 
         include_once "../classes/codes.class.php";
 
         $code = new codes();
-        // $codes = $code->delete
+        $deleteAllCodes = $code->deleteAllCodes($cpf);
 
-        $historic = $this->listLocal($code);
-
-        if ($historic){
-
-            $this->deleteAllLocal($code);
+        if ($deleteAllCodes) {
             
-        }
-        
-        $sql = "DELETE FROM codes WHERE id = ?";
-        $stmt = $this->connection()->prepare($sql);
-        
-        $deleted = $stmt->execute([$id]);
-        
-        if ($deleted){
-
-            return $deleted;
+            $sql = "DELETE FROM users WHERE id = ?";
+            $stmt = $this->connection()->prepare($sql);
+            $deleted = $stmt->execute([$id]);
+            
+            if ($deleted){
+    
+                return $deleted;
+    
+            } else {
+    
+                $errorInfo = $stmt->errorInfo();
+                return $errorInfo[2];
+    
+            }
 
         } else {
 
-            $errorInfo = $stmt->errorInfo();
-            return $errorInfo[2];
+            $_SESSION['error'] = "{$deleteAllCodes}";
+            header("Location: ../adm/painel.php?edited=1");
 
         }
+        
 
     }
 

@@ -58,20 +58,22 @@ class codes extends dbh{
 
     }
 
-    public function deleteAllCode($id, $code, $cpf){
+    public function deleteAllCodes($cpf){
 
-        $historic = $this->listLocal($code);
+        // Deleting historic
+        $codes = $this->listCodes($cpf);
 
-        if ($historic){
-
-            $this->deleteAllLocal($code);
+        foreach ($codes as $cod) {
             
+            $this->deleteAllLocal($cod['code']);
+
         }
+
+        // Deleting all codes
         
-        $sql = "DELETE FROM codes WHERE id = ?";
+        $sql = "DELETE FROM codes WHERE cpf = ?";
         $stmt = $this->connection()->prepare($sql);
-        
-        $deleted = $stmt->execute([$id]);
+        $deleted = $stmt->execute([$cpf]);
         
         if ($deleted){
 

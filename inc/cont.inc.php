@@ -98,17 +98,17 @@ if (isset($_POST['deleteClient'])) {
     $cpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
 
     $adm = new adm();
-    $deleteClient = $adm->deleteClient($id);
+    $deleteClient = $adm->deleteClient($id, $cpf);
 
     if ($deleteClient) {
         
-        $_SESSION['alert'] = "Histórico excluido com sucesso!";
+        $_SESSION['alert'] = "Cliente excluido com sucesso!";
         header("Location: ../adm/painel.php?edited=1");
 
     }else{
 
-        $_SESSION['error'] = $$deleteLocal;
-        header("Location: ../adm/usuario.painel.php?cpf={$cpf}&edited=1");
+        $_SESSION['error'] = $$deleteClient;
+        header("Location: ../adm/painel.php?edited=1");
         
     }
     
