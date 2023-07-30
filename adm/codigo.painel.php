@@ -35,7 +35,7 @@ if ($_SESSION['adm'] === TRUE) {
     <form action="../inc/cont.inc.php" method="POST">
         <div class="banner">
             <h1><?php echo "Histórico da Remessa ".$_GET['code'];?></h1>
-            <button name="logout" type="submit" class="logout">Sair</button>
+            <button name="logout" type="submit" class="logout-button">Sair</button>
         </div>
     </form>
     

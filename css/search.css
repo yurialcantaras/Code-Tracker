@@ -1,0 +1,77 @@
+body {
+  font-family: Arial, sans-serif;
+  background: rgb(246,231,10);
+  background: linear-gradient(29deg, rgba(246,231,10,1) 14%, rgba(0,0,0,1) 100%);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column; /* Stacks elements vertically */
+}
+
+.logo-container img {
+  max-width: 200px; /* Sets the maximum width of the logo */
+}
+
+.container {
+  max-width: 400px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 300px;
+}
+
+.container h2 {
+  color: #808080;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container input[type="text"],
+.container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.container input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #F6E70A;
+  color: #000;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.codeslist {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #1B2431;
+}
+
+th {
+  background-color: #048243;
+  color: white;
+}
+
+tr:nth-child(even) {
+  background-color: #32BF84;
+}

@@ -44,16 +44,20 @@ if (isset($_POST['search'])) {
     $codes = new codes();
     $user = new user();
     $allCodes = $codes->listCodes($cpf);
-    $userName = $user->getName($allCodes[0]['cpf']);
+    
+    if ($allCodes != 0) {
 
-    if ($allCodes) {
+        
+        $userName = $user->getName($allCodes[0]['cpf']);
 
         $_SESSION['allCodes'] = $allCodes;
         $_SESSION['userName'] = $userName;
-        header("Location: ../listagem.php?list=1");
+        $_SESSION['pesquisa'] = true;
+        header("Location: ../listagem.php?cpf={$cpf}&list=1");
 
     }else{
 
+        $_SESSION['error'] = "Cliente não cadastrado.";
         header("Location: ../index.php?list=0");
 
     }
@@ -114,7 +118,6 @@ if (isset($_POST['deleteClient'])) {
     
 }
 
-
 if (isset($_POST['editClient'])) {
     
     $editedId = $_POST['editedId'];
@@ -127,7 +130,7 @@ if (isset($_POST['editClient'])) {
     if ($editedUser) {
         
         $_SESSION['error'] = "Cliente alterado com sucesso!";
-        header("Location: ../adm/usuario.painel.php?user={$editedCpf}&edited=1");
+        header("Location: ../adm/usuario.painel.php?cpf={$editedCpf}&edited=1");
 
     }else{
 

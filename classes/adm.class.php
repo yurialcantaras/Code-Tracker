@@ -22,6 +22,25 @@ class adm extends dbh{
 
     }
 
+    public function editClient($editedName, $editedCpf, $editedId){
+
+        $sql = "UPDATE users SET name = ?, cpf = ? WHERE id = ?";
+        $stmt = $this->connection()->prepare($sql);
+        $stmt->execute([$editedName, $editedCpf, $editedId]);
+
+        if ($stmt->execute()) {
+
+            return $stmt->execute();
+
+        } else {
+
+            $errorInfo = $stmt->errorInfo();
+            return $errorInfo[2];
+
+        }
+
+    }
+
     public function deleteClient($id, $cpf){
 
         include_once "../classes/codes.class.php";
@@ -74,25 +93,6 @@ class adm extends dbh{
 
     }
 
-    public function editClient($editedName, $editedCpf, $editedId){
-
-        $sql = "UPDATE users SET name = ?, cpf = ? WHERE id = ?";
-        $stmt = $this->connection()->prepare($sql);
-        $stmt->execute([$editedName, $editedCpf, $editedId]);
-
-        if ($stmt->execute()) {
-
-            return $stmt->execute();
-
-        } else {
-
-            $errorInfo = $stmt->errorInfo();
-            return $errorInfo[2];
-
-        }
-
-    }
-    
     
 }
 

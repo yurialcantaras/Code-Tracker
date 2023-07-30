@@ -4,63 +4,108 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-if ($_GET['list'] == 1) {
+session_start();
 
-    session_start();
-    $userName = $_SESSION['userName'];
+if ($_SESSION['pesquisa'] === TRUE) {
+
+    include_once 'classes/adm.class.php';
+    include_once 'classes/codes.class.php';
+
+    $adm = new adm();
+    $user = $adm->selectClient($_GET['cpf']);
+
+    if ($user != false) {
+        
+        $code = new codes();
+        $codes = $code->listCodes($_GET['cpf']);
+    
+        if (!isset($_SESSION['error'])) {
+            
+            $_SESSION['error'] = " ";
+    
+        }
 
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Localizador</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    
-<div class="codeslist">
-    
-    <h1>Localização do Produto</h1>
-    <h3><?php echo $userName; ?></h3>
+    <head>
+        <title><?php echo $user[0]['name']; ?></title>
+        <link rel="stylesheet" href="css/allcodes-client.css">
+        <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=10, minimum-scale=1.0">
+    </head>
+    <body>
+        <div id="message">
+            <?php echo $_SESSION['error']; ?>
+        </div>
+        <div class="banner">
+            <div class="logo-container">
+                <a href="index.php"><img src="files/logo-canto.png" alt="Evolua Sports Logo"></a>
+            </div>
+            <h1 class="mainTittle">Seja bem vindo <?php echo $user[0]['name']; ?>!</h1>
+            <a href="index.php" class="logout-button">Voltar</a>
+        </div>
 
-    <table>
-        <tr>
-            <th>Código</th>
-            <th>Localização</th>
-        </tr>
-
-        <?php
+        <div class="panel">
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th class="orderTittle">Pedido</th>
+                        <th class="locationTittle">Última Localização</th>
+                    </tr>
+                    <?php
                     
-        if (isset($_SESSION['allCodes'])) {
+                    foreach ($codes as $cod) {
 
-            $allCodes = $_SESSION['allCodes'];
-            
-            foreach ($allCodes as $code) {
-                
-                echo "<tr><td>{$code['codigo']}</td><td>{$code['localizacao']}</td></tr>";
-                
-            }
-            
-        } else {
-        
-        header("Location: index.php?code=0");
-        
-        }
-    
-        ?>
-    </table>
+                        $local = $code->listLocal($cod['code']);
+                        $local = reset($local);
 
-    <p><a href="index.php">Voltar</a></p>
-</div>
+                        if ($local != false) {
+                            
+                            echo "
+                                <tr>
+                                    <td class='orderTittle code'><a href='codigos.php?code={$cod['code']}&cpf={$_GET['cpf']}'>{$cod['code']}</a></td>
+                                    <td class='locationTittle text'><a href='codigos.php?code={$cod['code']}&cpf={$_GET['cpf']}'>{$local['historic']}</a></td>
+                                </tr>
+                            ";
+                        } else if ($local == false) {
+                            
+                            echo "
+                                <tr>
+                                    <td class='orderTittle'><a href='codigos.php?code={$cod['code']}&cpf={$_GET['cpf']}'>{$cod['code']}</a></td>
+                                    <td class='locationTittle text'><a href='codigos.php?code={$cod['code']}&cpf={$_GET['cpf']}'>Sem Localização</a></td>
+                                </tr>
+                            ";
 
-</body>
+                        }
+
+                    }
+                    ?>
+                </table>
+            </div>
+        </div>
+
+        <footer>
+
+            <span class="bottom-text"><b>Suporte: (45) 98820-9378 | contato@evoluasports.com.br</b></span>
+
+        </footer>
+
+        <script src="js/javascript.js"></script>
+    </body>
 </html>
 
 <?php
 
-} else {
+    }else{
 
-    header("Location: index.php?code=0");  
+        session_destroy();
+        header("Location: index.php?list=0");
+
+    }
+
+}else{
+
+    header("Location: index.php?permission=0");
 
 }
 

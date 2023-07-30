@@ -37,7 +37,7 @@ if ($_SESSION['adm'] === TRUE) {
     <form action="../inc/cont.inc.php" method="POST">
         <div class="banner">
             <h1>Cliente <?php echo $user[0]['name']; ?></h1>
-            <button name="logout" type="submit" class="logout">Sair</button>
+            <button name="logout" type="submit" class="logout-button">Sair</button>
         </div>
     </form>
 

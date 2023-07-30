@@ -1,37 +1,43 @@
-body {
+html, body {
+    height: 100%;
+    background-color: #e0e0e0;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
 }
 
 .banner {
-    background-color: #048243;
-    color: #fff;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 12%, rgba(146,136,0,1) 21%, rgba(204,190,0,1) 27%, rgba(253,236,0,1) 35%, rgba(253,236,0,1) 59%, rgba(242,225,0,1) 65%, rgba(174,162,0,1) 72%, rgba(0,0,0,1) 89%);
+    color: #090C08;
     padding: 10px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
 
-.banner h1 {
-    margin: 0;
-    padding: 0;
+.logo-container {
+    flex: 0 0 auto; /* Prevent the logo from growing or shrinking */
+    margin-right: 20px; /* Add some spacing between logo and H1 */
+}
+
+.logo-container img {
+    width: 200px; /* Adjust the max-width as needed */
+}
+
+h1 {
+    flex: 1; /* Allow the H1 to grow and take available space */
+    margin: 0; /* Remove any default margin */
     text-align: center;
-    flex-grow: 1;
 }
 
-.banner .logout {
-    width: 55px;
-    background-color: #dc3545;
-    color: #f2f2f2;
+.logout-button {
+    background-color: #007EA7;
+    color: #fff;
     font-weight: bold;
+    padding: 8px 16px;
     border: none;
     border-radius: 3px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.banner .logout:hover {
-    background-color: #af2835;
+    text-decoration: none;
 }
 
 .panel {
@@ -80,8 +86,8 @@ table td, table th {
 }
 
 table th {
-    background-color: #45a049;
-    color: #fff;
+    background-color: #fdec00;
+    color: #000;
 }
 
 .action-button {
@@ -116,9 +122,9 @@ table th {
 
 .back-button button, .insert-button button{
     padding: 10px 20px;
-    background-color: #28a745;
+    background-color: #fdec00;
     border: none;
-    color: #fff;
+    color: #000;
     font-weight: bold;
     cursor: pointer;
     display: inline-block;
@@ -196,5 +202,18 @@ table th {
 
 #close-btn {
     margin-top: 10px;
+}
+
+footer{
+
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    color: #090C08;
+    padding: 10px;
+    text-align: center;
+
 }
   

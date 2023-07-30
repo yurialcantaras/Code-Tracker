@@ -17,11 +17,11 @@ if (!isset($_SESSION['error'])) {
 <html>
 <head>
   <title>Formulário de Login</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/login.adm.css">
 </head>
 <body>
   <div class="container">
-    <h2>Login</h2>
+    <h2>Login Administrativo</h2>
     <form action="inc/cont.inc.php" method="post">
       <label for="email">Email:</label>
       <input type="text" id="email" name="eml" required>

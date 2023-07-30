@@ -26,7 +26,7 @@ if ($_SESSION['adm'] === TRUE) {
     <form action="../inc/cont.inc.php" method="POST">
         <div class="banner">
             <h1>Painel de Administração</h1>
-            <button name="logout" type="submit" class="logout">Sair</button>
+            <button name="logout" type="submit" class="logout-button">Sair</button>
         </div>
     </form>
     <div class="panel">
