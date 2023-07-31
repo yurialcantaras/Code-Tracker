@@ -6,6 +6,31 @@ html, body {
     padding: 0;
 }
 
+/* =========== Massage Alert =========== */
+
+.alert-container {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    background-color: #0f9fff; /* Green */
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999; /* Ensure it's above other elements */
+    display: none; /* Hidden by default */
+  }
+
+  /* Close button styles */
+  .close-btn {
+    float: right;
+    cursor: pointer;
+  }
+  
+/* =========== Rest of Page =========== */
+
 .banner {
     background: rgb(0,0,0);
     background: linear-gradient(90deg, rgba(0,0,0,1) 12%, rgba(146,136,0,1) 21%, rgba(204,190,0,1) 27%, rgba(253,236,0,1) 35%, rgba(253,236,0,1) 59%, rgba(242,225,0,1) 65%, rgba(174,162,0,1) 72%, rgba(0,0,0,1) 89%);
@@ -31,7 +56,7 @@ h1 {
 }
 
 .logout-button {
-    background-color: #007EA7;
+    background-color: brown;
     color: #fff;
     font-weight: bold;
     padding: 8px 16px;
@@ -40,34 +65,28 @@ h1 {
     text-decoration: none;
 }
 
+.info-container {
+    margin: 20px auto;
+    width: 300px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.icons img{
+    cursor: pointer;
+    width: 25px;
+    margin: 5px;
+    height: 25px;
+}
+
 .panel {
     margin: 20px auto;
     max-width: 70%;
     background-color: #f2f2f2;
     padding: 20px;
     border-radius: 4px;
-}
-
-.info-container {
-    margin: 20px auto;
-    max-width: 15%;
-    background-color: #f2f2f2;
-    padding: 20px;
-    border-radius: 4px;
-}
-
-.info-container ul{
-    margin-left: 3%;
-}
-
-.icons{
-    text-align: center;
-}
-
-.icons img{
-    width: 25px;
-    margin: 5px;
-    height: 25px;
 }
 
 .table-container {
@@ -87,23 +106,35 @@ table td, table th {
 
 table th {
     background-color: #fdec00;
-    color: #000;
+}
+
+.action-container{
+    width: 180px;
+    white-space: nowrap;
 }
 
 .action-button {
-    padding: 6px 10px;
-    background-color: #007bff;
     border: none;
     color: #fff;
     text-decoration: none;
     cursor: pointer;
+    display: inline-block;
+}
+
+.action-button input{
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
 }
 
 .action-button.delete {
+    padding: 5px 10px;
     background-color: #dc3545;
 }
 
 .action-button.view {
+    padding: 6px 10px;
     background-color: #0f9fff;
 }
 
@@ -132,13 +163,35 @@ table th {
 
 .edit-button, .cancel-button{
     padding: 10px 20px;
-    background-color: #28a745;
+    background-color: #fdec00;
     border: none;
     color: #fff;
     font-weight: bold;
     cursor: pointer;
     display: inline-block;
 }
+
+.edit-button:hover{
+    padding: 11px 20px;
+    background-color: orange;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.cancel-button:hover{
+    padding: 11px 19px;
+    background-color: #0f9fff;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
 /* ------------------------------------ */
 
 #editForm {

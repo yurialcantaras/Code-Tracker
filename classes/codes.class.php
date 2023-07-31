@@ -185,13 +185,6 @@ class codes extends dbh{
 
     }
 
-
-    public function editLocal(){
-
-        
-
-    }
-
 }
 
 ?>

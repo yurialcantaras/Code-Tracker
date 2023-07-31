@@ -21,7 +21,25 @@ class adm extends dbh{
         }
 
     }
+    
+    public function listClients(){
 
+        $sql = "SELECT * FROM users ORDER BY name";
+        $login = $this->connection()->prepare($sql);
+        $login->execute();
+        return $login->fetchAll();
+
+    }
+
+    public function selectClient($cpf){
+
+        $sql = "SELECT * FROM users WHERE cpf = ?";
+        $login = $this->connection()->prepare($sql);
+        $login->execute([$cpf]);
+        return $login->fetchAll();
+
+    }
+    
     public function editClient($editedName, $editedCpf, $editedId){
 
         $sql = "UPDATE users SET name = ?, cpf = ? WHERE id = ?";
@@ -72,24 +90,6 @@ class adm extends dbh{
 
         }
         
-
-    }
-
-    public function selectClient($cpf){
-
-        $sql = "SELECT * FROM users WHERE cpf = ?";
-        $login = $this->connection()->prepare($sql);
-        $login->execute([$cpf]);
-        return $login->fetchAll();
-
-    }
-    
-    public function listClients(){
-
-        $sql = "SELECT * FROM users ORDER BY name";
-        $login = $this->connection()->prepare($sql);
-        $login->execute();
-        return $login->fetchAll();
 
     }
 

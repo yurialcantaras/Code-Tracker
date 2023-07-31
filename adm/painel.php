@@ -14,6 +14,12 @@ if ($_SESSION['adm'] === TRUE) {
     $code = new codes();
     $users = $adm->listClients();
 
+    if (!isset($_SESSION['message'])) {
+        
+        $_SESSION['message'] = " ";
+
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,6 +28,11 @@ if ($_SESSION['adm'] === TRUE) {
     <link rel="stylesheet" href="../css/painel-style.css">
 </head>
 <body>
+
+    <div class="alert-container" id="alert">
+        <?php echo $_SESSION['message']; ?>
+        <span id="closeButton" onclick="closeAlert()">X</span>
+    </div>
     
     <form action="../inc/cont.inc.php" method="POST">
         <div class="banner">
@@ -81,6 +92,14 @@ if ($_SESSION['adm'] === TRUE) {
 </html>
 
 <?php
+
+    echo "<script>showAlert();</script>";
+
+    if (isset($_SESSION['message'])){
+        
+        unset($_SESSION['message']);
+        
+    }
 
 }else{
 

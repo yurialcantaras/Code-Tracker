@@ -17,9 +17,9 @@ if ($_SESSION['adm'] === TRUE) {
     $code = new codes();
     $codes = $code->listCodes($_GET['cpf']);
 
-    if (!isset($_SESSION['error'])) {
+    if (!isset($_SESSION['message'])) {
         
-        $_SESSION['error'] = " ";
+        $_SESSION['message'] = " ";
 
     }
 
@@ -31,9 +31,11 @@ if ($_SESSION['adm'] === TRUE) {
     <link rel="stylesheet" href="../css/painel-style.css">
 </head>
 <body>
-    <div id="message">
-        <?php echo $_SESSION['error']; ?>
+    <div class="alert-container" id="alert">
+        <?php echo $_SESSION['message']; ?>
+        <span id="closeButton" onclick="closeAlert()">x</span>
     </div>
+
     <form action="../inc/cont.inc.php" method="POST">
         <div class="banner">
             <h1>Cliente <?php echo $user[0]['name']; ?></h1>
@@ -43,11 +45,11 @@ if ($_SESSION['adm'] === TRUE) {
 
     <div class="info-container">
 
-        <ul>
-            <b><p id="userName"><?php echo $user[0]['name']; ?></p></b>
-            <b><p id="userCpf"><?php echo $user[0]['cpf']; ?></p></b>
-            <b><p><?php echo "Total Códigos: ".count($codes); ?></p></b>
-        </ul>
+        <div class="clientInfo">
+            <p id="userName"><?php echo $user[0]['name']; ?></p>
+            <p id="userCpf"><?php echo $user[0]['cpf']; ?></p>
+            <p><?php echo "Total Códigos: ".count($codes); ?></p>
+        </div>
         
         <div class="icons">
             <img onclick="showEditForm()" id="edit-button" src="../files/edit.png" alt="Ícone de Edição">
@@ -83,13 +85,13 @@ if ($_SESSION['adm'] === TRUE) {
                             <tr>
                             <td>{$cod['code']}</td>
                             <td>{$local['historic']}</td>
-                            <td>
-                                <a href='codigo.painel.php?code=".$cod['code']."&cpf=".$_GET['cpf']."'><button id='view-btn' class='action-button view'>Histórico</button></a>
-                                <form action='../inc/cont.inc.php' method='post' onsubmit='return confirmForm();'>
+                            <td class='action-container'>
+                                <a href='codigo.painel.php?code=".$cod['code']."&cpf=".$_GET['cpf']."'><button class='action-button view'>Histórico</button></a>
+                                <form class='action-button delete' action='../inc/cont.inc.php' method='post' onsubmit='return confirmForm();'>
                                     <input type='hidden' value='{$cod['id']}' name='id'>
                                     <input type='hidden' value='{$cod['code']}' name='code'>
                                     <input type='hidden' value='{$_GET['cpf']}' name='cpf'>
-                                    <input id='delete-code' type='submit' value='Excluir' name='deleteCode'>
+                                    <input type='submit' value='Excluir' name='deleteCode'>
                                 </form>
                             </td>
                             </tr>
@@ -102,11 +104,11 @@ if ($_SESSION['adm'] === TRUE) {
                             <td>Sem localização</td>
                             <td>
                                 <a href='codigo.painel.php?code=".$cod['code']."&cpf=".$_GET['cpf']."'><button id='view-btn' class='action-button view'>Histórico</button></a>
-                                <form action='../inc/cont.inc.php' method='post' onsubmit='return confirmForm();'>
+                                <form class='action-button delete' action='../inc/cont.inc.php' method='post' onsubmit='return confirmForm();'>
                                     <input type='hidden' value='{$cod['id']}' name='id'>
                                     <input type='hidden' value='{$cod['code']}' name='code'>
                                     <input type='hidden' value='{$_GET['cpf']}' name='cpf'>
-                                    <input id='delete-code' type='submit' value='Excluir' name='deleteCode'>
+                                    <input class='action-button' type='submit' value='Excluir' name='deleteCode'>
                                 </form>
                             </td>
                             </tr>
@@ -131,7 +133,7 @@ if ($_SESSION['adm'] === TRUE) {
                 <label for="cpf">CPF:</label>
                 <input name="editedCpf"type="text" value="<?php echo $user[0]['cpf']; ?>"><br>
                 <input class="edit-button" type="submit" name="editClient" value="Salvar">
-                <input class="cancel-button" onclick="hideEditForm()" type="button" id="close-btn" value="fechar">
+                <input class="cancel-button" onclick="hideEditForm()" type="button" id="close-btn" value="Fechar">
             </form>
 
         </div>
@@ -150,7 +152,7 @@ if ($_SESSION['adm'] === TRUE) {
                 <label for="local">Data e Hora:</label>
                 <input type="datetime-local" id="datetime" name="datetime">
                 <input class="edit-button" type="submit" name="newCode" value="Salvar">
-                <input class="cancel-button" onclick="hideNewCodeForm()" type="button" id="close-btn" value="fechar">
+                <input class="cancel-button" onclick="hideNewCodeForm()" type="button" id="close-btn" value="Fechar">
             </form>
 
         </div>
@@ -175,6 +177,14 @@ if ($_SESSION['adm'] === TRUE) {
 </html>
 
 <?php
+
+    echo "<script>showAlert();</script>";
+
+    if (isset($_SESSION['message'])){
+        
+        unset($_SESSION['message']);
+        
+    }
 
 }else{
 

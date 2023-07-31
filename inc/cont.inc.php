@@ -53,11 +53,11 @@ if (isset($_POST['search'])) {
         $_SESSION['allCodes'] = $allCodes;
         $_SESSION['userName'] = $userName;
         $_SESSION['pesquisa'] = true;
-        header("Location: ../listagem.php?cpf={$cpf}&list=1");
+        header("Location: ../listagem.php?cpf={$cpf}");
 
     }else{
 
-        $_SESSION['error'] = "Cliente não cadastrado.";
+        $_SESSION['message'] = "Cliente não cadastrado.";
         header("Location: ../index.php?list=0");
 
     }
@@ -66,7 +66,7 @@ if (isset($_POST['search'])) {
 
 if (isset($_POST['newClient'])) {
     
-    $newName = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['name']);
+    $newName = preg_replace('/[^\p{L}0-9\s]/u', '', $_POST['name']);
     $newCpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
 
     $adm = new adm();
@@ -77,13 +77,13 @@ if (isset($_POST['newClient'])) {
 
         if ($newClient) {
             
-            $_SESSION['error'] = "Cliente cadastrado com sucesso!";
-            header("Location: ../adm/usuario.painel.php?cpf={$newCpf}&newClient=1");
+            $_SESSION['message'] = "Cliente cadastrado com sucesso!";
+            header("Location: ../adm/usuario.painel.php?cpf={$newCpf}&alert=1");
 
         }else{
 
-            $_SESSION['error'] = $newClient;
-            header("Location: ../adm/usuario.painel.php?edited=1");
+            $_SESSION['message'] = $newClient;
+            header("Location: ../adm/usuario.painel.php?alert=1");
         
         }
         
@@ -106,13 +106,13 @@ if (isset($_POST['deleteClient'])) {
 
     if ($deleteClient) {
         
-        $_SESSION['alert'] = "Cliente excluido com sucesso!";
-        header("Location: ../adm/painel.php?edited=1");
+        $_SESSION['message'] = "Cliente excluido com sucesso!";
+        header("Location: ../adm/painel.php?alert=1");
 
     }else{
 
-        $_SESSION['error'] = $$deleteClient;
-        header("Location: ../adm/painel.php?edited=1");
+        $_SESSION['message'] = $$deleteClient;
+        header("Location: ../adm/painel.php?alert=1");
         
     }
     
@@ -121,7 +121,7 @@ if (isset($_POST['deleteClient'])) {
 if (isset($_POST['editClient'])) {
     
     $editedId = $_POST['editedId'];
-    $editedName = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['editedName']);
+    $editedName = preg_replace('/[^\p{L}0-9\s]/u', '', $_POST['editedName']);
     $editedCpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['editedCpf']);
 
     $adm = new adm();
@@ -129,13 +129,13 @@ if (isset($_POST['editClient'])) {
 
     if ($editedUser) {
         
-        $_SESSION['error'] = "Cliente alterado com sucesso!";
-        header("Location: ../adm/usuario.painel.php?cpf={$editedCpf}&edited=1");
+        $_SESSION['message'] = "Cliente alterado com sucesso!";
+        header("Location: ../adm/usuario.painel.php?cpf={$editedCpf}&alert=1");
 
     }else{
 
-        $_SESSION['error'] = $editedUser;
-        header("Location: ../adm/usuario.painel.php?edited=1");
+        $_SESSION['message'] = $editedUser;
+        header("Location: ../adm/usuario.painel.php?alert=1");
         
     }
 
@@ -145,7 +145,7 @@ if (isset($_POST['newCode'])) {
     
     $cpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
     $code = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['code']);
-    $local = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['local']);
+    $local = preg_replace('/[^\p{L}0-9\s]/u', '', $_POST['local']);
     $date = $_POST['datetime'];
     $datetime = date("Y-m-d H:i:s", strtotime($date));
     
@@ -158,20 +158,20 @@ if (isset($_POST['newCode'])) {
     
         if ($newCode) {
             
-            $_SESSION['alert'] = "Novo código cadastrado com sucesso!";
-            header("Location: ../adm/usuario.painel.php?cpf={$cpf}&edited=1");
+            $_SESSION['message'] = "Novo código cadastrado com sucesso!";
+            header("Location: ../adm/usuario.painel.php?cpf={$cpf}&alert=1");
     
         }else{
     
-            $_SESSION['error'] = $editedUser;
-            header("Location: ../adm/usuario.painel.php?cpf={$cpf}edited=0");
+            $_SESSION['message'] = $editedUser;
+            header("Location: ../adm/usuario.painel.php?cpf={$cpf}alert=1");
             
         }
         
     } else {
         
-        $_SESSION['alert'] = "Remessa já existe para esse cliente";
-        header("Location: ../adm/usuario.painel.php?cpf={$cpf}&edited=0");        
+        $_SESSION['message'] = "Pedido já existe para algum cliente";
+        header("Location: ../adm/usuario.painel.php?cpf={$cpf}&alert=1");        
 
     }
     
@@ -188,13 +188,13 @@ if (isset($_POST['deleteCode'])) {
 
     if ($deleteCode) {
         
-        $_SESSION['alert'] = "Histórico excluido com sucesso!";
-        header("Location: ../adm/usuario.painel.php?cpf={$cpf}&edited=1");
+        $_SESSION['message'] = "Histórico excluido com sucesso!";
+        header("Location: ../adm/usuario.painel.php?cpf={$cpf}&alert=1");
 
     }else{
 
-        $_SESSION['error'] = $$deleteLocal;
-        header("Location: ../adm/usuario.painel.php?cpf={$cpf}&edited=1");
+        $_SESSION['message'] = $$deleteLocal;
+        header("Location: ../adm/usuario.painel.php?cpf={$cpf}&alert=1");
         
     }
 
@@ -213,13 +213,13 @@ if (isset($_POST['newLocal'])) {
 
     if ($newLocal) {
         
-        $_SESSION['alert'] = "Novo código cadastrado com sucesso!";
-        header("Location: ../adm/codigo.painel.php?cpf={$cpf}&code={$code}&edited=1");
+        $_SESSION['message'] = "Novo código cadastrado com sucesso!";
+        header("Location: ../adm/codigo.painel.php?cpf={$cpf}&code={$code}&alert=1");
 
     }else{
 
-        $_SESSION['error'] = $editedUser;
-        header("Location: ../adm/usuario.painel.php?cpf={$cpf}edited=0");
+        $_SESSION['message'] = $editedUser;
+        header("Location: ../adm/usuario.painel.php?cpf={$cpf}alert=1");
         
     }
     
@@ -236,13 +236,13 @@ if (isset($_POST['deleteLocal'])) {
 
     if ($deleteLocal) {
         
-        $_SESSION['alert'] = "Histórico excluido com sucesso!";
-        header("Location: ../adm/codigo.painel.php?code={$code}&cpf={$cpf}&edited=1");
+        $_SESSION['message'] = "Histórico excluido com sucesso!";
+        header("Location: ../adm/codigo.painel.php?code={$code}&cpf={$cpf}&alert=1");
 
     }else{
 
-        $_SESSION['error'] = $$deleteLocal;
-        header("Location: ../adm/codigo.painel.php?code={$code}&cpf={$cpf}&edited=0");
+        $_SESSION['message'] = $$deleteLocal;
+        header("Location: ../adm/codigo.painel.php?code={$code}&cpf={$cpf}&alert=1");
         
     }
 
