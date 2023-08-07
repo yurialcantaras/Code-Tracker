@@ -25,6 +25,7 @@ if ($_SESSION['adm'] === TRUE) {
 <html>
 <head>
     <title>Painel de Administração</title>
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=10, minimum-scale=1.0">
     <link rel="stylesheet" href="../css/painel-style.css">
 </head>
 <body>

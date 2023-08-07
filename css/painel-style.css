@@ -21,13 +21,13 @@ html, body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 9999; /* Ensure it's above other elements */
     display: none; /* Hidden by default */
-  }
+}
 
-  /* Close button styles */
-  .close-btn {
-    float: right;
-    cursor: pointer;
-  }
+/* Close button styles */
+.close-btn {
+float: right;
+cursor: pointer;
+}
   
 /* =========== Rest of Page =========== */
 
@@ -53,6 +53,7 @@ h1 {
     flex: 1; /* Allow the H1 to grow and take available space */
     margin: 0; /* Remove any default margin */
     text-align: center;
+    margin-left: 5%;
 }
 
 .logout-button {
@@ -67,7 +68,8 @@ h1 {
 
 .info-container {
     margin: 20px auto;
-    width: 300px;
+    max-width: 300px;
+    min-width: none;
     background-color: #f2f2f2;
     padding: 20px;
     border-radius: 4px;
@@ -249,6 +251,19 @@ table th {
     font-size: 16px;
 }
 
+@media (max-width: 600px) {
+    .formContent{
+        width: 50%;
+        padding: 10px;
+        overflow-x: hidden;
+    }
+
+    .formContent input{
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
 .editing-user{
     text-align: center;
 }
@@ -269,4 +284,36 @@ footer{
     text-align: center;
 
 }
-  
+
+/* ------------------------------------ */
+
+@media (max-width: 700px) {
+
+    .banner{
+        justify-content: right;
+    }
+    
+    .banner h2, h1{
+        display: none;
+    }
+    
+    .panel{
+        width: 450px;
+        overflow-x: auto;
+    }
+
+    .table-container {
+        min-width: 400px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .table-container table {
+        border-collapse: collapse;
+    }
+
+    .back-button {
+        float: none;
+    }
+    
+}
