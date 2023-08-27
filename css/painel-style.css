@@ -41,17 +41,17 @@ cursor: pointer;
 }
 
 .logo-container {
-    flex: 0 0 auto; /* Prevent the logo from growing or shrinking */
-    margin-right: 20px; /* Add some spacing between logo and H1 */
+    flex: 0 0 auto; 
+    margin-right: 20px;
 }
 
 .logo-container img {
-    width: 200px; /* Adjust the max-width as needed */
+    width: 200px; 
 }
 
 h1 {
-    flex: 1; /* Allow the H1 to grow and take available space */
-    margin: 0; /* Remove any default margin */
+    flex: 1; 
+    margin: 0; 
     text-align: center;
     margin-left: 5%;
 }
@@ -167,7 +167,7 @@ table th {
     padding: 10px 20px;
     background-color: #fdec00;
     border: none;
-    color: #fff;
+    color: #000;
     font-weight: bold;
     cursor: pointer;
     display: inline-block;
@@ -230,19 +230,49 @@ table th {
 }
 
 .formContent {
-    background-color: #f2f2f2;
-    text-align: center;
-    padding: 20px;
-    border-radius: 5px;
     width: 40%;
     max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    text-align: right;
+    padding: 20px;
+    border-radius: 5px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
+.fields {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.fields label{
+    width: 100px;
+    text-align: right;
+    margin-right: 5px;
+}
+
+.formContent select{
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.formContent option{
+    float: right;
+}
+
 .formContent input{
+    /* float: right; */
     padding: 10px;
     margin-top: 4px;
     margin-bottom: 4px;
@@ -251,17 +281,32 @@ table th {
     font-size: 16px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 880px) {
     .formContent{
         width: 50%;
         padding: 10px;
         overflow-x: hidden;
+        text-align: center;
     }
 
     .formContent input{
         width: 100%;
         box-sizing: border-box;
     }
+    
+    .formContent select{
+        width: 100%;
+    }
+
+    .fields{
+        display: contents;
+        margin: 0;
+    }
+
+    .fields label{
+        width: 100% !important;
+    }
+
 }
 
 .editing-user{

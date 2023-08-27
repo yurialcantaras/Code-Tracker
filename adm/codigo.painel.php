@@ -87,10 +87,28 @@ if ($_SESSION['adm'] === TRUE) {
                 <form method="post" action="../inc/cont.inc.php" onsubmit="return confirmForm();">
                     <input type="hidden" name="code" value="<?php echo $_GET['code']; ?>">
                     <input type="hidden" name="cpf" value="<?php echo $_GET['cpf']; ?>">
-                    <label for="local">Nova Localização:</label>
-                    <input name="local" type="text" require><br>
-                    <label for="local">Data e Hora:</label>
-                    <input type="datetime-local" id="datetime" name="datetime">
+                    
+                    <div class="fields">
+                        <label for="local">Nova Localização:</label>
+                        <input name="local" type="text" require><br>
+                    </div>
+
+                    <div class="field">
+                        <label for="local">Data e Hora:</label>
+                        <input type="datetime-local" id="datetime" name="datetime">
+                    </div>
+
+                    <div class="field">
+                        <label for="local">Status:</label>
+                        <select name="status">
+                            <option value="tobrazil">Para o Brasil</option>
+                            <option value="inbrazil">No Brasil</option>
+                            <option value="delivered">Entregue</option>
+                            <option value="notdelivered">Não entregue</option>
+                            <option value="police">Fiscalizando</option>
+                        </select><br>
+                    </div>
+                    
                     <input class="edit-button" type="submit" name="newLocal" value="Salvar">
                     <input class="cancel-button" onclick="hideNewCodeForm()" type="button" id="close-btn" value="fechar">
                 </form>

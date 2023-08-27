@@ -4,14 +4,14 @@ include_once "dbh.class.php";
 
 class codes extends dbh{
 
-    public function newCode($cpf, $code, $local, $datetime){
+    public function newCode($cpf, $code, $local, $datetime, $status){
 
         $sql = "INSERT INTO codes (`cpf`, `code`) VALUES (?, ?)";
         $stmt = $this->connection()->prepare($sql);
 
         if ($stmt->execute([$cpf, $code])) {
 
-            if ($this->newLocal($code, $local, $datetime)) {
+            if ($this->newLocal($code, $local, $datetime, $status)) {
                 
                 return TRUE;
 
@@ -117,12 +117,12 @@ class codes extends dbh{
         
     }
 
-    public function newLocal($code, $local, $datetime){
+    public function newLocal($code, $local, $datetime, $status){
 
-        $sql = "INSERT INTO historic (`code`, `historic`, `record_date`) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO historic (`code`, `historic`, `record_date`, `icon`) VALUES (?, ?, ?, ?)";
         $stmt = $this->connection()->prepare($sql);
 
-        if ($stmt->execute([$code, $local, $datetime])) {
+        if ($stmt->execute([$code, $local, $datetime, $status])) {
             
             return true;
 

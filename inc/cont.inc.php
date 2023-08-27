@@ -148,13 +148,14 @@ if (isset($_POST['newCode'])) {
     $local = preg_replace('/[^\p{L}0-9\s]/u', '', $_POST['local']);
     $date = $_POST['datetime'];
     $datetime = date("Y-m-d H:i:s", strtotime($date));
+    $status = $_POST['status'];
     
     $adm = new codes();
     $existCode = $adm->existCode($code);
 
     if ($existCode == false) {
 
-        $newCode = $adm->newCode($cpf, $code, $local, $datetime);
+        $newCode = $adm->newCode($cpf, $code, $local, $datetime, $status);
     
         if ($newCode) {
             
@@ -209,7 +210,7 @@ if (isset($_POST['newLocal'])) {
     $datetime = date("Y-m-d H:i:s", strtotime($date));
     
     $adm = new codes();
-    $newLocal = $adm->newLocal($code, $local, $datetime);
+    $newLocal = $adm->newLocal($code, $local, $datetime, $status);
 
     if ($newLocal) {
         

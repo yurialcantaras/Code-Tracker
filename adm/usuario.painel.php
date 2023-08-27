@@ -22,7 +22,6 @@ if ($_SESSION['adm'] === TRUE) {
         $_SESSION['message'] = " ";
 
     }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -146,12 +145,30 @@ if ($_SESSION['adm'] === TRUE) {
             <form method="post" action="../inc/cont.inc.php" onsubmit="return confirmForm();">
                 <h4 class="editing-user">Nova Remessa</h4>
                 <input type="hidden" name="cpf" value="<?php echo $_GET['cpf']; ?>">
-                <label for="code">Código:</label>
-                <input name="code" type="text"><br>
-                <label for="local">Localização:</label>
-                <input name="local" type="text"><br>
-                <label for="local">Data e Hora:</label>
-                <input type="datetime-local" id="datetime" name="datetime">
+                
+                <div class="fields">
+                    <label for="code">Código:</label>
+                    <input name="code" type="text"><br>
+                </div>
+                <div class="fields">
+                    <label for="local">Status:</label>
+                    <select name="status">
+                        <option value="1">Para o Brasil</option>
+                        <option value="2">No Brasil</option>
+                        <option value="3">Entregue</option>
+                        <option value="4">Não entregue</option>
+                        <option value="5">Está sendo fiscalizado</option>
+                    </select><br>
+                </div>
+                <div class="fields">
+                    <label for="local">Localização:</label>
+                    <input name="local" type="text"><br>
+                </div>
+                <div class="fields">
+                    <label for="local">Data e Hora:</label>
+                    <input type="datetime-local" id="datetime" name="datetime">
+                </div>
+
                 <input class="edit-button" type="submit" name="newCode" value="Salvar">
                 <input class="cancel-button" onclick="hideNewCodeForm()" type="button" id="close-btn" value="Fechar">
             </form>

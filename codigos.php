@@ -36,6 +36,7 @@ if ($_SESSION['pesquisa'] === TRUE) {
         <div class="table-container">
             <table>
                 <tr>
+                    <th></th>
                     <th class="locationTittle">Histórico</th>
                 </tr>
                 
@@ -43,8 +44,13 @@ if ($_SESSION['pesquisa'] === TRUE) {
                 
                 foreach ($locals as $local) {
 
+                    $date = new DateTime($local['record_date']);
+                    $dateFormat = $date->format('d/m/Y H:i');
+                    $local['record_date'] = $dateFormat;
+
                     echo "
                     <tr>
+                        <td></td>
                         <td class='locationTittle'>{$local['record_date']}<br><b>{$local['historic']}</b></td>
                     </tr>
                     ";
