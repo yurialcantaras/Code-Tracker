@@ -1,0 +1,364 @@
+html, body {
+    height: 100%;
+    background-color: #e0e0e0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* =========== Massage Alert =========== */
+
+.alert-container {
+    position: fixed;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+    background-color: #0f9fff; /* Green */
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 9999; /* Ensure it's above other elements */
+    display: none; /* Hidden by default */
+}
+
+/* =========== Rest of Page =========== */
+
+.banner {
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 12%, rgba(146,136,0,1) 21%, rgba(204,190,0,1) 27%, rgba(253,236,0,1) 35%, rgba(253,236,0,1) 59%, rgba(242,225,0,1) 65%, rgba(174,162,0,1) 72%, rgba(0,0,0,1) 89%);
+    color: #090C08;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-container {
+    flex: 0 0 auto; 
+    margin-right: 20px;
+}
+
+.logo-container img {
+    width: 200px; 
+}
+
+h1 {
+    flex: 1; 
+    margin: 0; 
+    text-align: center;
+    margin-left: 5%;
+}
+
+.logout-button {
+    background-color: brown;
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.info-container {
+    margin: 20px auto;
+    max-width: 300px;
+    min-width: none;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.icons img{
+    cursor: pointer;
+    width: 25px;
+    margin: 5px;
+    height: 25px;
+}
+
+.panel {
+    margin: 20px auto;
+    max-width: 70%;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.table-container {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table th {
+    background-color: #fdec00;
+}
+
+.action-container{
+    width: 180px;
+    white-space: nowrap;
+}
+
+/* Close button styles */
+.close-btn {
+float: right;
+cursor: pointer;
+}
+
+.action-button {
+    border: none;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.action-button input{
+    cursor: pointer;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.action-button.delete {
+    padding: 5px 10px;
+    background-color: #dc3545;
+}
+
+.action-button.view {
+    padding: 6px 10px;
+    background-color: #0f9fff;
+}
+
+.insert-button {
+    text-align: left;
+}
+
+.back-button {
+    float: right;
+}
+
+.back-button, .insert-button{
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.back-button button, .insert-button button{
+    padding: 10px 20px;
+    background-color: #fdec00;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.edit-button, .cancel-button{
+    padding: 10px 20px;
+    background-color: #fdec00;
+    border: none;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.edit-button:hover{
+    padding: 11px 20px;
+    background-color: orange;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.cancel-button:hover{
+    padding: 11px 19px;
+    background-color: #0f9fff;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-block;
+}
+
+
+/* ------------------------------------ */
+
+#editForm {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+#newCodeForm {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+#deleteClientForm {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.formContent {
+    width: 40%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    text-align: right;
+    padding: 20px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.fields {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px 0;
+}
+
+.fields label{
+    width: 100px;
+    text-align: right;
+    margin-right: 5px;
+}
+
+.formContent select{
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.formContent option{
+    float: right;
+}
+
+.formContent input{
+    /* float: right; */
+    padding: 10px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border-radius: 3px;
+    border: 1px solid gray;
+    font-size: 16px;
+}
+
+@media (max-width: 880px) {
+    .formContent{
+        width: 50%;
+        padding: 10px;
+        overflow-x: hidden;
+        text-align: center;
+    }
+
+    .formContent input{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .formContent select{
+        width: 100%;
+    }
+
+    .fields{
+        display: contents;
+        margin: 0;
+    }
+
+    .fields label{
+        width: 100% !important;
+    }
+
+}
+
+.editing-user{
+    text-align: center;
+}
+
+#close-btn {
+    margin-top: 10px;
+}
+
+footer{
+
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    color: #090C08;
+    padding: 10px;
+    text-align: center;
+
+}
+
+/* ------------------------------------ */
+
+@media (max-width: 700px) {
+
+    .banner{
+        justify-content: right;
+    }
+    
+    .banner h2, h1{
+        display: none;
+    }
+    
+    .panel{
+        width: 450px;
+        overflow-x: auto;
+    }
+
+    .table-container {
+        min-width: 400px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .table-container table {
+        border-collapse: collapse;
+    }
+
+    .back-button {
+        float: none;
+    }
+    
+}
