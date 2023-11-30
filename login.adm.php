@@ -19,7 +19,10 @@ if (!isset($_SESSION['error'])) {
   <title>Formulário de Login</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/login.adm.css">
+<<<<<<< HEAD
   <link rel="icon" href="files/favicon.webp" type="image/webp">
+=======
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 </head>
 <body>
   <div class="container">
@@ -35,7 +38,10 @@ if (!isset($_SESSION['error'])) {
     </form>
   </div>
 </body>
+<<<<<<< HEAD
 <script>
   // Criar alerta de erro de login
 </script>
+=======
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 </html>

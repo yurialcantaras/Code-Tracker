@@ -23,6 +23,15 @@ html, body {
     display: none; /* Hidden by default */
 }
 
+<<<<<<< HEAD
+=======
+/* Close button styles */
+.close-btn {
+float: right;
+cursor: pointer;
+}
+  
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 /* =========== Rest of Page =========== */
 
 .banner {
@@ -109,12 +118,15 @@ table th {
     white-space: nowrap;
 }
 
+<<<<<<< HEAD
 /* Close button styles */
 .close-btn {
 float: right;
 cursor: pointer;
 }
 
+=======
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 .action-button {
     border: none;
     color: #fff;

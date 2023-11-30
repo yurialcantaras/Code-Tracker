@@ -11,6 +11,10 @@ html, body {
     flex-direction: column;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 .banner {
     min-height: 10%;
     background: rgb(0,0,0);
@@ -21,6 +25,10 @@ html, body {
 }
 
 .logo-container {
+<<<<<<< HEAD
+=======
+    flex: 0 0 auto; 
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
     margin-right: 20px; 
 }
 
@@ -38,7 +46,10 @@ html, body {
 h1 {
     flex: 1; 
     margin: 0; 
+<<<<<<< HEAD
     margin-left: 70px;
+=======
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
     text-align: center;
 }
 
@@ -71,6 +82,7 @@ h1 {
 
 .table-container table {
     width: 70%;
+<<<<<<< HEAD
     border-collapse: collapse;
     margin-left: -45px;
 }
@@ -84,6 +96,10 @@ h1 {
 
 .table-container .historyIcon{
     border-right: 2px solid black;
+=======
+    /* border: 1px solid black; */
+    border-collapse: collapse;
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 }
 
 .table-container table a{
@@ -104,12 +120,16 @@ table td, table th {
 
 .locationTittle{
     width: 60%;
+<<<<<<< HEAD
     padding-left: 20px;
+=======
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
     text-align: left;
 }
 
 @media (max-width: 706px) {
 
+<<<<<<< HEAD
     body {
         font-size: 12px;
     }
@@ -132,6 +152,11 @@ table td, table th {
 
     .logout-button {
         float: right;
+=======
+    .banner{
+        background: #fdec00;
+        justify-content: right;
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
     }
 
     .mainTittle{
@@ -142,6 +167,7 @@ table td, table th {
         width: 75%;
     }
 
+<<<<<<< HEAD
     .table-container table {
         width: 85%;
         margin-left: -20px;
@@ -151,6 +177,19 @@ table td, table th {
         display: none;
     }
 
+=======
+    .historic{
+        display: none;
+    }
+    
+    .logo-container{
+        display: none;
+    }
+
+    .logout-button {
+        float: right;
+    }
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
 }
 

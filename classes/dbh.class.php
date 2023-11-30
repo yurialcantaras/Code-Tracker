@@ -2,10 +2,17 @@
 
 class dbh{
 
+<<<<<<< HEAD
     private $hst = "127.0.0.1";
     private $dbh = "tracker_db";
     private $usr = "root";
     private $pwd = "";
+=======
+    private $hst = "localhost";
+    private $dbh = "localizador";
+    private $usr = "root";
+    private $pwd = "12345";
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
     protected function connection(){
 
@@ -18,4 +25,8 @@ class dbh{
 
 }
 
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462

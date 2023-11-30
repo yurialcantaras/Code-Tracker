@@ -6,7 +6,11 @@ error_reporting(E_ALL);
 
 session_start();
 
+<<<<<<< HEAD
 if ($_SESSION['search'] === TRUE) {
+=======
+if ($_SESSION['pesquisa'] === TRUE) {
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
     include_once 'classes/adm.class.php';
     include_once 'classes/codes.class.php';
@@ -21,7 +25,11 @@ if ($_SESSION['search'] === TRUE) {
     
         if (!isset($_SESSION['error'])) {
             
+<<<<<<< HEAD
             $_SESSION['error'] = "";
+=======
+            $_SESSION['error'] = " ";
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
     
         }
 
@@ -32,7 +40,10 @@ if ($_SESSION['search'] === TRUE) {
         <title><?php echo $user[0]['name']; ?></title>
         <link rel="stylesheet" href="css/allcodes-client.css">
         <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=10, minimum-scale=1.0">
+<<<<<<< HEAD
         <link rel="icon" href="files/favicon.webp" type="image/webp">
+=======
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
     </head>
     <body>
         <div id="message">
@@ -40,9 +51,15 @@ if ($_SESSION['search'] === TRUE) {
         </div>
         <div class="banner">
             <div class="logo-container">
+<<<<<<< HEAD
                 <a id="logodesk" href="index.php"><img src="files/logo-canto.png" alt="Evolua Sports Logo"></a>
             </div>
             <h1 class="mainTittle">Seja bem vindo(a) <?php echo $user[0]['name']; ?>!</h1>
+=======
+                <a href="index.php"><img src="files/logo-canto.png" alt="Evolua Sports Logo"></a>
+            </div>
+            <h1 class="mainTittle">Seja bem vindo <?php echo $user[0]['name']; ?>!</h1>
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
             <a href="index.php" class="logout-button">Voltar</a>
         </div>
 
@@ -100,14 +117,22 @@ if ($_SESSION['search'] === TRUE) {
     }else{
 
         session_destroy();
+<<<<<<< HEAD
         header("Location: index.php");
+=======
+        header("Location: index.php?list=0");
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
     }
 
 }else{
 
+<<<<<<< HEAD
     $_SESSION['message'] = "Acesso negado";
     header("Location: index.php?alert=1");
+=======
+    header("Location: index.php?permission=0");
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
 }
 

@@ -18,10 +18,17 @@ if ($_SESSION['adm'] === TRUE) {
     $user = $adm->selectClient($_GET['cpf']);
     $locals = $cod->listLocal($_GET['code']);
 
+<<<<<<< HEAD
     if (!isset($_SESSION['message'])) {
 
         $_SESSION['message'] = "";
         
+=======
+    if (!isset($_SESSION['error'])) {
+        
+        $_SESSION['error'] = " ";
+
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
     }
 
 ?>
@@ -31,6 +38,7 @@ if ($_SESSION['adm'] === TRUE) {
         <title>Produtos de <?php echo $user[0]['name']; ?></title>
         <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=10, minimum-scale=1.0">
         <link rel="stylesheet" href="../css/painel-style.css">
+<<<<<<< HEAD
         <link rel="icon" href="files/favicon.webp" type="image/webp">
     </head>
     <body>
@@ -40,6 +48,10 @@ if ($_SESSION['adm'] === TRUE) {
             <span id="closeButton" onclick="closeAlert()"></span>
         </div>
 
+=======
+    </head>
+    <body>
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
         <form action="../inc/cont.inc.php" method="POST">
             <div class="banner">
                 <h1><?php echo "Histórico do Pedido ".$_GET['code'];?></h1>
@@ -102,17 +114,29 @@ if ($_SESSION['adm'] === TRUE) {
 
                     <div class="field">
                         <label for="local">Data e Hora:</label>
+<<<<<<< HEAD
                         <input type="datetime-local" id="datetime" name="datetime" require>
+=======
+                        <input type="datetime-local" id="datetime" name="datetime">
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
                     </div>
 
                     <div class="field">
                         <label for="local">Status:</label>
                         <select name="status">
+<<<<<<< HEAD
                             <option value="1">Para o Brasil</option>
                             <option value="2">No Brasil</option>
                             <option value="3">Entregue</option>
                             <option value="4">Não entregue</option>
                             <option value="5">Fiscalizando</option>
+=======
+                            <option value="tobrazil">Para o Brasil</option>
+                            <option value="inbrazil">No Brasil</option>
+                            <option value="delivered">Entregue</option>
+                            <option value="notdelivered">Não entregue</option>
+                            <option value="police">Fiscalizando</option>
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
                         </select><br>
                     </div>
                     
@@ -128,12 +152,18 @@ if ($_SESSION['adm'] === TRUE) {
 </html>
 
 <?php
+<<<<<<< HEAD
 
     echo "<script>showAlert();</script>";
 
     if (isset($_SESSION['message'])){
     
         unset($_SESSION['message']);
+=======
+    if (isset($_SESSION['error'])){
+        
+        unset($_SESSION['error']);
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
         
     }
     

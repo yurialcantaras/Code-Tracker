@@ -8,6 +8,10 @@ session_start();
 include_once "../classes/user.class.php";
 include_once "../classes/adm.class.php";
 include_once "../classes/codes.class.php";
+<<<<<<< HEAD
+=======
+$allCodes = null;
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
 if (isset($_POST['login'])) {
     
@@ -40,6 +44,7 @@ if (isset($_POST['logout'])) {
 if (isset($_POST['search'])) {
 
     $cpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
+<<<<<<< HEAD
     
     $user = new user();
     $userName = $user->getName($cpf);
@@ -47,12 +52,31 @@ if (isset($_POST['search'])) {
     if ($userName != FALSE) {
 
         $_SESSION['search'] = true;
+=======
+    $codes = new codes();
+    $user = new user();
+    $allCodes = $codes->listCodes($cpf);
+    
+    if ($allCodes != 0) {
+
+        
+        $userName = $user->getName($allCodes[0]['cpf']);
+
+        $_SESSION['allCodes'] = $allCodes;
+        $_SESSION['userName'] = $userName;
+        $_SESSION['pesquisa'] = true;
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
         header("Location: ../listagem.php?cpf={$cpf}");
 
     }else{
 
+<<<<<<< HEAD
         $_SESSION['message'] = "Cliente não cadastrado";
         header("Location: ../index.php?alert=1");
+=======
+        $_SESSION['message'] = "Cliente não cadastrado.";
+        header("Location: ../index.php?list=0");
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
     }
 
@@ -139,7 +163,11 @@ if (isset($_POST['newCode'])) {
     
     $cpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
     $code = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['code']);
+<<<<<<< HEAD
     $local = preg_replace('/[<>`=\\{\}]/', '', $_POST['local']);
+=======
+    $local = preg_replace('/[^\p{L}0-9\s]/u', '', $_POST['local']);
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
     $date = $_POST['datetime'];
     $datetime = date("Y-m-d H:i:s", strtotime($date));
     $status = $_POST['status'];
@@ -199,17 +227,28 @@ if (isset($_POST['newLocal'])) {
     
     $cpf = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['cpf']);
     $code = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['code']);
+<<<<<<< HEAD
     $local = preg_replace('/[<>`=\\{\}]/', '', $_POST['local']);
     $date = $_POST['datetime'];
     $datetime = date("Y-m-d H:i:s", strtotime($date));
     $status = $_POST['status'];
+=======
+    $local = preg_replace('/[^\p{L}0-9\s]/u', '', $_POST['local']);
+    $date = $_POST['datetime'];
+    $datetime = date("Y-m-d H:i:s", strtotime($date));
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
     
     $adm = new codes();
     $newLocal = $adm->newLocal($code, $local, $datetime, $status);
 
     if ($newLocal) {
+<<<<<<< HEAD
 
         $_SESSION['message'] = "Novo registro realizado com sucesso!";
+=======
+        
+        $_SESSION['message'] = "Novo código cadastrado com sucesso!";
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
         header("Location: ../adm/codigo.painel.php?cpf={$cpf}&code={$code}&alert=1");
 
     }else{
@@ -237,7 +276,11 @@ if (isset($_POST['deleteLocal'])) {
 
     }else{
 
+<<<<<<< HEAD
         $_SESSION[',0'] = $$deleteLocal;
+=======
+        $_SESSION['message'] = $$deleteLocal;
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
         header("Location: ../adm/codigo.painel.php?code={$code}&cpf={$cpf}&alert=1");
         
     }

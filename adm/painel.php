@@ -16,7 +16,11 @@ if ($_SESSION['adm'] === TRUE) {
 
     if (!isset($_SESSION['message'])) {
         
+<<<<<<< HEAD
         $_SESSION['message'] = "";
+=======
+        $_SESSION['message'] = " ";
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
     }
 
@@ -27,7 +31,10 @@ if ($_SESSION['adm'] === TRUE) {
     <title>Painel de Administração</title>
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=10, minimum-scale=1.0">
     <link rel="stylesheet" href="../css/painel-style.css">
+<<<<<<< HEAD
     <link rel="icon" href="files/favicon.webp" type="image/webp">
+=======
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 </head>
 <body>
 
@@ -79,9 +86,15 @@ if ($_SESSION['adm'] === TRUE) {
             <form method="post" action="../inc/cont.inc.php" onsubmit="return confirmForm();">
                 <h4 id="editing-user">Novo Cliente<b><span id="userName"></span></b></h4>
                 <label for="name">Nome:</label>
+<<<<<<< HEAD
                 <input name="name" type="text" required><br>
                 <label for="cpf">CPF:</label>
                 <input name="cpf" type="text" required><br>
+=======
+                <input name="name" type="text"><br>
+                <label for="cpf">CPF:</label>
+                <input name="cpf" type="text"><br>
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
                 <input class="edit-button" id="save-btn" type="submit" name="newClient" value="Salvar">
                 <input class="cancel-button" onclick="hideEditForm()" type="button" id="close-btn" value="fechar">
             </form>

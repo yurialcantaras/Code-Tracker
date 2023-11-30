@@ -6,12 +6,19 @@ class adm extends dbh{
 
     public function newClient($name, $cpf){
 
+<<<<<<< HEAD
         $id = $this->idGenerator();
 
         $sql = "INSERT INTO users (`id`, `name`, `cpf`) VALUES (?, ?, ?)";
         $stmt = $this->connection()->prepare($sql);
 
         if ($stmt->execute([$id, $name, $cpf])) {
+=======
+        $sql = "INSERT INTO users (`name`, `cpf`) VALUES (?, ?)";
+        $stmt = $this->connection()->prepare($sql);
+
+        if ($stmt->execute([$name, $cpf])) {
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
             return TRUE;
 
@@ -91,6 +98,7 @@ class adm extends dbh{
             header("Location: ../adm/painel.php?edited=1");
 
         }
+<<<<<<< HEAD
 
     }
 
@@ -114,6 +122,9 @@ class adm extends dbh{
         }
 
         return $id;
+=======
+        
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
     }
 

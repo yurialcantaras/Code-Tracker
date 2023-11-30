@@ -6,6 +6,7 @@ class codes extends dbh{
 
     public function newCode($cpf, $code, $local, $datetime, $status){
 
+<<<<<<< HEAD
         $table = "codes";
         $id = $this->idGenerator($table);
 
@@ -13,6 +14,12 @@ class codes extends dbh{
         $stmt = $this->connection()->prepare($sql);
 
         if ($stmt->execute([$id, $cpf, $code])) {
+=======
+        $sql = "INSERT INTO codes (`cpf`, `code`) VALUES (?, ?)";
+        $stmt = $this->connection()->prepare($sql);
+
+        if ($stmt->execute([$cpf, $code])) {
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
             if ($this->newLocal($code, $local, $datetime, $status)) {
                 
@@ -122,6 +129,7 @@ class codes extends dbh{
 
     public function newLocal($code, $local, $datetime, $status){
 
+<<<<<<< HEAD
         $table = "historic";
         $id = $this->idGenerator($table);
 
@@ -129,6 +137,12 @@ class codes extends dbh{
         $stmt = $this->connection()->prepare($sql);
 
         if ($stmt->execute([$id, $code, $local, $datetime, $status])) {
+=======
+        $sql = "INSERT INTO historic (`code`, `historic`, `record_date`, `icon`) VALUES (?, ?, ?, ?)";
+        $stmt = $this->connection()->prepare($sql);
+
+        if ($stmt->execute([$code, $local, $datetime, $status])) {
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
             
             return true;
 
@@ -191,6 +205,7 @@ class codes extends dbh{
 
     }
 
+<<<<<<< HEAD
     public function idSelector($table, $id){
 
         $sql = "SELECT * FROM $table WHERE id = ?";
@@ -214,6 +229,8 @@ class codes extends dbh{
 
     }
 
+=======
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 }
 
 ?>

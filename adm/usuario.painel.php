@@ -19,7 +19,11 @@ if ($_SESSION['adm'] === TRUE) {
 
     if (!isset($_SESSION['message'])) {
         
+<<<<<<< HEAD
         $_SESSION['message'] = "";
+=======
+        $_SESSION['message'] = " ";
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
     }
 ?>
@@ -29,7 +33,10 @@ if ($_SESSION['adm'] === TRUE) {
     <title>Cliente <?php echo $user[0]['name']; ?></title>
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=10, minimum-scale=1.0">
     <link rel="stylesheet" href="../css/painel-style.css">
+<<<<<<< HEAD
     <link rel="icon" href="files/favicon.webp" type="image/webp">
+=======
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 </head>
 <body>
     <div class="alert-container" id="alert">
@@ -128,11 +135,19 @@ if ($_SESSION['adm'] === TRUE) {
             
             <form method="post" action="../inc/cont.inc.php" onsubmit="return confirmForm();">
                 <h4 class="editing-user">Alteração de Cliente</h4>
+<<<<<<< HEAD
                 <input name="editedId" type="hidden" value="<?php echo $user[0]['id']; ?>" required>
                 <label for="name">Nome:</label>
                 <input name="editedName"type="text" value="<?php echo $user[0]['name']; ?>" required><br>
                 <label for="cpf">CPF:</label>
                 <input name="editedCpf"type="text" value="<?php echo $user[0]['cpf']; ?>" required><br>
+=======
+                <input name="editedId" type="hidden" value="<?php echo $user[0]['id']; ?>">
+                <label for="name">Nome:</label>
+                <input name="editedName"type="text" value="<?php echo $user[0]['name']; ?>"><br>
+                <label for="cpf">CPF:</label>
+                <input name="editedCpf"type="text" value="<?php echo $user[0]['cpf']; ?>"><br>
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
                 <input class="edit-button" type="submit" name="editClient" value="Salvar">
                 <input class="cancel-button" onclick="hideEditForm()" type="button" id="close-btn" value="Fechar">
             </form>
@@ -149,11 +164,19 @@ if ($_SESSION['adm'] === TRUE) {
                 
                 <div class="fields">
                     <label for="code">Código:</label>
+<<<<<<< HEAD
                     <input name="code" type="number" required><br>
                 </div>
                 <div class="fields">
                     <label for="local">Status:</label>
                     <select name="status" required>
+=======
+                    <input name="code" type="text"><br>
+                </div>
+                <div class="fields">
+                    <label for="local">Status:</label>
+                    <select name="status">
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
                         <option value="1">Para o Brasil</option>
                         <option value="2">No Brasil</option>
                         <option value="3">Entregue</option>
@@ -163,11 +186,19 @@ if ($_SESSION['adm'] === TRUE) {
                 </div>
                 <div class="fields">
                     <label for="local">Localização:</label>
+<<<<<<< HEAD
                     <input name="local" type="text" required><br>
                 </div>
                 <div class="fields">
                     <label for="local">Data e Hora:</label>
                     <input type="datetime-local" id="datetime" name="datetime" required>
+=======
+                    <input name="local" type="text"><br>
+                </div>
+                <div class="fields">
+                    <label for="local">Data e Hora:</label>
+                    <input type="datetime-local" id="datetime" name="datetime">
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
                 </div>
 
                 <input class="edit-button" type="submit" name="newCode" value="Salvar">

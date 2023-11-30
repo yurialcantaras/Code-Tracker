@@ -6,7 +6,11 @@ error_reporting(E_ALL);
 
 session_start();
 
+<<<<<<< HEAD
 if ($_SESSION['search'] === TRUE) {
+=======
+if ($_SESSION['pesquisa'] === TRUE) {
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
     include_once 'classes/codes.class.php';
     $cod = new codes();
@@ -14,7 +18,11 @@ if ($_SESSION['search'] === TRUE) {
 
     if (!isset($_SESSION['error'])) {
         
+<<<<<<< HEAD
         $_SESSION['error'] = "";
+=======
+        $_SESSION['error'] = " ";
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
     }
 
@@ -25,7 +33,10 @@ if ($_SESSION['search'] === TRUE) {
     <title>Pedido <?php echo $_GET['code']; ?></title>
     <link rel="stylesheet" href="css/allcodes-client.css">
     <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=10, minimum-scale=1.0">
+<<<<<<< HEAD
     <link rel="icon" href="files/favicon.webp" type="image/webp">
+=======
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 </head>
 <body>
     <div class="banner">
@@ -40,15 +51,24 @@ if ($_SESSION['search'] === TRUE) {
                     <th></th>
                     <th class="locationTittle">Histórico</th>
                 </tr>
+<<<<<<< HEAD
 
                 <?php
                 
                 foreach ($locals as $local) {
                     
+=======
+                
+                <?php
+                
+                foreach ($locals as $local) {
+
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
                     $date = new DateTime($local['record_date']);
                     $dateFormat = $date->format('d/m/Y H:i');
                     $local['record_date'] = $dateFormat;
 
+<<<<<<< HEAD
                     if ($local['icon'] == 1) {
 
                         $icon = "./files/decolar.png";
@@ -74,6 +94,11 @@ if ($_SESSION['search'] === TRUE) {
                     echo "
                     <tr>
                         <td class='historyIcon'><img src='{$icon}' alt=''></td>
+=======
+                    echo "
+                    <tr>
+                        <td></td>
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
                         <td class='locationTittle'>{$local['record_date']}<br><b>{$local['historic']}</b></td>
                     </tr>
                     ";
@@ -99,8 +124,12 @@ if ($_SESSION['search'] === TRUE) {
 
 }else{
 
+<<<<<<< HEAD
     $_SESSION['message'] = "Acesso negado";
     header("Location: index.php?alert=1");
+=======
+    header("Location: ../index.php?login=0");
+>>>>>>> 85759136dcba576719c15050778e57ee0954a462
 
 }
 
