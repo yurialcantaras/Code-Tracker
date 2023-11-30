@@ -37,7 +37,7 @@ if (!isset($_SESSION['message'])) {
   <div class="container">
     <h2>Localize seu Pedido</h2>
     <form action="inc/cont.inc.php" method="post">
-      <input placeholder="Digite seu CPF aqui" type="text" id="cpf" name="cpf" required>
+      <input placeholder="Digite seu CPF aqui" type="number" id="cpf" name="cpf" required>
       <input type="submit" name="search" value="Entrar">
     </form>
   </div>

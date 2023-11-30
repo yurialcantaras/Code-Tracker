@@ -149,7 +149,7 @@ if ($_SESSION['adm'] === TRUE) {
                 
                 <div class="fields">
                     <label for="code">Código:</label>
-                    <input name="code" type="text" required><br>
+                    <input name="code" type="number" required><br>
                 </div>
                 <div class="fields">
                     <label for="local">Status:</label>
